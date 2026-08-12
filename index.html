@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Scanner QR CSSD</title>
+
+  <script src="https://unpkg.com/html5-qrcode"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef3f8;
+    }
+
+    .header {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 18px 10px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .header p {
+      margin: 5px 0 0;
+      font-size: 12px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 15px auto;
+      padding: 0 10px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    #reader {
+      width: 100%;
+    }
+
+    .hasil {
+      margin-top: 12px;
+      padding: 12px;
+      background: #e8f5e9;
+      border-radius: 8px;
+      word-break: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 18px;
+      }
+
+      .container {
+        padding: 0 8px;
+      }
+
+      .card {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>INSTALASI CSSD</h1>
+    <p>RSUD HARAPAN INSAN SENDAWAR</p>
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <h3>📷 SCAN QR CODE</h3>
+
+      <div id="reader"></div>
+
+      <div class="hasil">
+        <b>Hasil Scan:</b>
+        <div id="hasilScan">Belum ada hasil</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    function hasilScan(qrCodeMessage) {
+
+      document.getElementById("hasilScan").innerText =
+        qrCodeMessage;
+
+    }
+
+    function gagalScan(errorMessage) {
+      // Abaikan error scan biasa
+    }
+
+    const scanner = new Html5QrcodeScanner(
+      "reader",
+      {
+        fps: 10,
+        qrbox: {
+          width: 250,
+          height: 250
+        }
+      },
+      false
+    );
+
+    scanner.render(
+      hasilScan,
+      gagalScan
+    );
+
+  </script>
+
+</body>
+</html>

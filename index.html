@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Scanner QR CSSD</title>
 
@@ -23,7 +18,6 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background: #eef3f8;
-      color: #172033;
     }
 
     .header {
@@ -45,65 +39,27 @@
 
     .container {
       width: 100%;
-      max-width: 500px;
+      max-width: 480px;
       margin: 15px auto;
       padding: 0 10px;
     }
 
     .card {
       background: white;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     }
 
     .card h3 {
       margin-top: 0;
       text-align: center;
-      font-size: 17px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      font-size: 13px;
-      margin-top: 12px;
-      margin-bottom: 6px;
-    }
-
-    select,
-    input,
-    button {
-      width: 100%;
-      min-height: 44px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    select,
-    input {
-      border: 1px solid #cbd5e1;
-      padding: 10px;
-      background: white;
-    }
-
-    button {
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn-tambah {
-      margin-top: 8px;
-      background: #64748b;
-      color: white;
+      font-size: 16px;
     }
 
     #reader {
       width: 100%;
-      overflow: hidden;
-      border-radius: 10px;
     }
 
     .hasil {
@@ -114,8 +70,13 @@
       word-break: break-word;
     }
 
-    .qr-text {
-      margin-top: 6px;
+    .hasil b {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .kode {
+      font-size: 17px;
       font-weight: bold;
       color: #0f172a;
     }
@@ -124,25 +85,36 @@
       display: none;
       margin-top: 15px;
       padding: 15px;
+      border-radius: 10px;
       background: #fff7ed;
-      border-radius: 12px;
       border: 1px solid #fed7aa;
+      text-align: center;
     }
 
     .konfirmasi h3 {
       margin: 0 0 8px;
-      text-align: center;
+      font-size: 17px;
     }
 
-    .pertanyaan {
-      text-align: center;
-      margin: 8px 0 15px;
-      font-weight: bold;
+    .konfirmasi p {
+      margin: 5px 0 15px;
+      font-size: 14px;
     }
 
-    .tombol-konfirmasi {
+    .tombol {
       display: flex;
       gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .btn-ya {
@@ -155,6 +127,13 @@
       color: white;
     }
 
+    .btn-scan {
+      background: #2563eb;
+      color: white;
+      width: 100%;
+      margin-top: 10px;
+    }
+
     .status {
       display: none;
       margin-top: 12px;
@@ -164,13 +143,7 @@
       font-weight: bold;
     }
 
-    .status.proses {
-      display: block;
-      background: #e0f2fe;
-      color: #0369a1;
-    }
-
-    .status.berhasil {
+    .status.sukses {
       display: block;
       background: #dcfce7;
       color: #166534;
@@ -182,307 +155,98 @@
       color: #991b1b;
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+    .status.proses {
+      display: block;
+      background: #e0f2fe;
+      color: #075985;
     }
 
-    .modal-box {
-      width: 100%;
-      max-width: 400px;
-      background: white;
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .modal-box h3 {
-      margin-top: 0;
-      text-align: center;
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .btn-simpan {
-      background: #2563eb;
-      color: white;
-    }
-
-    .btn-batal {
-      background: #e5e7eb;
-      color: #111827;
-    }
-
-    .info {
+    .petunjuk {
+      margin-top: 12px;
       font-size: 12px;
       color: #64748b;
       text-align: center;
-      margin-top: 8px;
     }
 
   </style>
-
 </head>
 
 <body>
 
-
-  <!-- ==========================================
-       HEADER
-       ========================================== -->
-
   <div class="header">
-
     <h1>INSTALASI CSSD</h1>
-
-    <p>
-      RSUD HARAPAN INSAN SENDAWAR
-    </p>
-
+    <p>RSUD HARAPAN INSAN SENDAWAR</p>
   </div>
 
 
   <div class="container">
 
-
-    <!-- ==========================================
-         DATA TRANSAKSI
-         ========================================== -->
-
     <div class="card">
 
-      <h3>📋 DATA TRANSAKSI</h3>
-
-
-      <label>
-        Jenis Transaksi
-      </label>
-
-      <select id="transaksi">
-
-        <option value="BARANG MASUK">
-          BARANG MASUK
-        </option>
-
-        <option value="PROSES STERIL">
-          PROSES STERIL
-        </option>
-
-        <option value="BARANG KELUAR">
-          BARANG KELUAR
-        </option>
-
-      </select>
-
-
-      <label>
-        Petugas
-      </label>
-
-      <select id="petugas">
-
-        <option value="">
-          Memuat petugas...
-        </option>
-
-      </select>
-
-
-      <label>
-        Ruangan
-      </label>
-
-      <select id="ruangan">
-
-        <option value="">
-          Memuat ruangan...
-        </option>
-
-      </select>
-
-
-      <button
-        class="btn-tambah"
-        onclick="bukaTambahRuangan()"
-      >
-        ➕ Tambah Ruangan
-      </button>
-
-
-      <label>
-        Jumlah
-      </label>
-
-      <input
-        id="jumlah"
-        type="number"
-        min="1"
-        value="1"
-      >
-
-
-    </div>
-
-
-    <!-- ==========================================
-         SCANNER
-         ========================================== -->
-
-    <div class="card">
-
-      <h3>
-        📷 SCAN QR CODE
-      </h3>
-
+      <h3>📷 SCAN QR CODE</h3>
 
       <div id="reader"></div>
 
-
       <div class="hasil">
 
-        <b>
-          Hasil Scan:
-        </b>
+        <b>Hasil Scan:</b>
 
-        <div
-          id="hasilScan"
-          class="qr-text"
-        >
-          Belum ada hasil scan
+        <div id="hasilScan" class="kode">
+          Belum ada hasil
         </div>
 
       </div>
 
 
-      <!-- ========================================
-           KONFIRMASI YA / TIDAK
-           ======================================== -->
+      <!-- =====================================
+           KONFIRMASI
+      ====================================== -->
 
-      <div
-        id="konfirmasi"
-        class="konfirmasi"
-      >
+      <div id="konfirmasi" class="konfirmasi">
 
-        <h3>
-          ⚠️ KONFIRMASI
-        </h3>
+        <h3>📋 Kirim Data?</h3>
 
+        <p>
+          QR Code berhasil dibaca.
+          <br>
+          Apakah data ini ingin dikirim ke Google Sheet?
+        </p>
 
-        <div class="pertanyaan">
-
-          Apakah instrumen / set
-          dalam kondisi lengkap?
-
-        </div>
-
-
-        <div class="tombol-konfirmasi">
+        <div class="tombol">
 
           <button
             class="btn-ya"
-            onclick="konfirmasiLengkap('YA')"
-          >
-            ✅ YA
+            onclick="kirimData()">
+            ✅ YA, KIRIM
           </button>
 
           <button
             class="btn-tidak"
-            onclick="konfirmasiLengkap('TIDAK')"
-          >
+            onclick="batalKirim()">
             ❌ TIDAK
           </button>
 
         </div>
 
+        <button
+          class="btn-scan"
+          onclick="scanUlang()">
+          🔄 SCAN ULANG
+        </button>
+
       </div>
 
 
-      <!-- ========================================
+      <!-- =====================================
            STATUS
-           ======================================== -->
+      ====================================== -->
 
-      <div
-        id="status"
-        class="status"
-      ></div>
+      <div id="status" class="status"></div>
 
 
-      <div class="info">
+      <div class="petunjuk">
 
-        Scan QR → Konfirmasi YA/TIDAK
-        → Data dikirim ke Google Sheet
-
-      </div>
-
-    </div>
-
-
-  </div>
-
-
-  <!-- ==========================================
-       MODAL TAMBAH RUANGAN
-       ========================================== -->
-
-  <div
-    id="modalRuangan"
-    class="modal"
-  >
-
-    <div class="modal-box">
-
-      <h3>
-        ➕ Tambah Ruangan
-      </h3>
-
-
-      <label>
-        Nama Ruangan
-      </label>
-
-      <input
-        id="namaRuangan"
-        type="text"
-        placeholder="Contoh: IBS"
-      >
-
-
-      <label>
-        PIN Admin
-      </label>
-
-      <input
-        id="pinAdmin"
-        type="password"
-        inputmode="numeric"
-        placeholder="Masukkan PIN"
-      >
-
-
-      <div class="modal-buttons">
-
-        <button
-          class="btn-batal"
-          onclick="tutupTambahRuangan()"
-        >
-          Batal
-        </button>
-
-        <button
-          class="btn-simpan"
-          onclick="simpanRuangan()"
-        >
-          Simpan
-        </button>
+        Scan QR → Periksa hasil → Pilih YA/TIDAK
 
       </div>
 
@@ -494,334 +258,112 @@
   <script>
 
 
-    // =================================================
+    // ==========================================
     // GOOGLE APPS SCRIPT
-    // =================================================
+    // ==========================================
 
     const API_URL =
       "https://script.google.com/macros/s/AKfycbw1pGmXUD9Q3v4k6ttlFlcNeiCyM25QZc7FpY_9x341B9Br2pik46FYRqqat95i6i2YAA/exec";
 
 
-    // =================================================
-    // VARIABEL SCANNER
-    // =================================================
+    // ==========================================
+    // VARIABEL
+    // ==========================================
 
     let scanner = null;
+
+    let qrHasil = "";
 
     let sedangScan = false;
 
     let sedangMengirim = false;
 
-    let qrHasil = "";
 
+    // ==========================================
+    // ELEMENT
+    // ==========================================
 
-    // =================================================
-    // AMBIL PETUGAS
-    // =================================================
+    const hasilScan =
+      document.getElementById("hasilScan");
 
-    async function loadPetugas() {
+    const konfirmasi =
+      document.getElementById("konfirmasi");
 
-      const select =
-        document.getElementById("petugas");
+    const status =
+      document.getElementById("status");
 
-      try {
 
-        const response =
-          await fetch(
-            API_URL +
-            "?action=getPetugas"
-          );
+    // ==========================================
+    // MEMULAI SCANNER
+    // ==========================================
 
-        const result =
-          await response.json();
+    function mulaiScanner() {
 
+      qrHasil = "";
 
-        select.innerHTML =
-          '<option value="">Pilih petugas</option>';
+      hasilScan.innerText =
+        "Menunggu QR Code...";
 
+      konfirmasi.style.display =
+        "none";
 
-        if (
-          result.berhasil &&
-          Array.isArray(result.data)
-        ) {
+      status.className =
+        "status";
 
-          result.data.forEach(
-            nama => {
-
-              const option =
-                document.createElement(
-                  "option"
-                );
-
-              option.value = nama;
-
-              option.textContent = nama;
-
-              select.appendChild(
-                option
-              );
-
-            }
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Gagal mengambil petugas:",
-          error
-        );
-
-        select.innerHTML =
-          '<option value="">Gagal memuat petugas</option>';
-
-      }
-
-    }
-
-
-    // =================================================
-    // AMBIL RUANGAN
-    // =================================================
-
-    async function loadRuangan() {
-
-      const select =
-        document.getElementById("ruangan");
-
-      try {
-
-        const response =
-          await fetch(
-            API_URL +
-            "?action=getRuangan"
-          );
-
-        const result =
-          await response.json();
-
-
-        select.innerHTML =
-          '<option value="">Pilih ruangan</option>';
-
-
-        if (
-          result.berhasil &&
-          Array.isArray(result.data)
-        ) {
-
-          result.data.forEach(
-            nama => {
-
-              const option =
-                document.createElement(
-                  "option"
-                );
-
-              option.value = nama;
-
-              option.textContent = nama;
-
-              select.appendChild(
-                option
-              );
-
-            }
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "Gagal mengambil ruangan:",
-          error
-        );
-
-        select.innerHTML =
-          '<option value="">Gagal memuat ruangan</option>';
-
-      }
-
-    }
-
-
-    // =================================================
-    // BUKA MODAL TAMBAH RUANGAN
-    // =================================================
-
-    function bukaTambahRuangan() {
-
-      document.getElementById(
-        "modalRuangan"
-      ).style.display = "flex";
-
-    }
-
-
-    // =================================================
-    // TUTUP MODAL
-    // =================================================
-
-    function tutupTambahRuangan() {
-
-      document.getElementById(
-        "modalRuangan"
-      ).style.display = "none";
-
-      document.getElementById(
-        "namaRuangan"
-      ).value = "";
-
-      document.getElementById(
-        "pinAdmin"
-      ).value = "";
-
-    }
-
-
-    // =================================================
-    // SIMPAN RUANGAN
-    // =================================================
-
-    async function simpanRuangan() {
-
-      const namaRuangan =
-        document.getElementById(
-          "namaRuangan"
-        ).value.trim();
-
-
-      const pin =
-        document.getElementById(
-          "pinAdmin"
-        ).value.trim();
-
-
-      if (!namaRuangan) {
-
-        alert(
-          "Nama ruangan belum diisi."
-        );
-
-        return;
-
-      }
-
-
-      if (!pin) {
-
-        alert(
-          "PIN Admin belum diisi."
-        );
-
-        return;
-
-      }
-
-
-      const data =
-        new URLSearchParams();
-
-
-      data.append(
-        "action",
-        "tambahRuangan"
-      );
-
-
-      data.append(
-        "pin",
-        pin
-      );
-
-
-      data.append(
-        "namaRuangan",
-        namaRuangan
-      );
-
-
-      try {
-
-        const response =
-          await fetch(
-            API_URL,
-            {
-              method: "POST",
-              body: data
-            }
-          );
-
-
-        const result =
-          await response.json();
-
-
-        if (result.berhasil) {
-
-          alert(
-            "✅ Ruangan berhasil ditambahkan."
-          );
-
-          tutupTambahRuangan();
-
-          await loadRuangan();
-
-
-          document.getElementById(
-            "ruangan"
-          ).value =
-            result.ruangan;
-
-        } else {
-
-          alert(
-            "❌ " +
-            result.pesan
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          "❌ Gagal terhubung ke Google Sheet."
-        );
-
-      }
-
-    }
-
-
-    // =================================================
-    // QR BERHASIL DIBACA
-    // =================================================
-
-    async function hasilScan(
-      qrCodeMessage
-    ) {
-
-      if (sedangScan) {
-        return;
-      }
-
-
-      if (sedangMengirim) {
-        return;
-      }
-
+      scanner =
+        new Html5Qrcode("reader");
 
       sedangScan = true;
 
+      scanner.start(
+
+        {
+          facingMode: "environment"
+        },
+
+        {
+          fps: 10,
+
+          qrbox: {
+            width: 250,
+            height: 250
+          }
+
+        },
+
+        berhasilScan,
+
+        gagalScan
+
+      ).catch(function(error) {
+
+        console.error(
+          "Kamera gagal:",
+          error
+        );
+
+        hasilScan.innerText =
+          "❌ Kamera tidak dapat digunakan.";
+
+      });
+
+    }
+
+
+    // ==========================================
+    // QR BERHASIL DIBACA
+    // ==========================================
+
+    async function berhasilScan(qrCodeMessage) {
+
+      if (!sedangScan) {
+        return;
+      }
+
+      sedangScan = false;
 
       qrHasil =
-        String(
-          qrCodeMessage
-        ).trim();
+        String(qrCodeMessage).trim();
 
 
       console.log(
@@ -830,152 +372,88 @@
       );
 
 
-      document.getElementById(
-        "hasilScan"
-      ).innerText =
-        qrHasil;
-
-
-      // -----------------------------------------------
-      // HENTIKAN KAMERA
-      // -----------------------------------------------
+      // Hentikan kamera
 
       try {
 
-        if (scanner) {
+        await scanner.stop();
 
-          await scanner.stop();
-
-        }
+        await scanner.clear();
 
       } catch (error) {
 
         console.log(
-          "Scanner stop:",
-          error
+          "Scanner sudah berhenti."
         );
 
       }
 
 
-      // -----------------------------------------------
-      // TAMPILKAN KONFIRMASI
-      // -----------------------------------------------
+      // Tampilkan hasil
 
-      document.getElementById(
-        "konfirmasi"
-      ).style.display =
+      hasilScan.innerText =
+        qrHasil;
+
+
+      // Tampilkan pertanyaan
+
+      konfirmasi.style.display =
         "block";
 
+    }
 
-      tampilStatus(
-        "",
-        ""
+
+    // ==========================================
+    // ERROR SCAN
+    // ==========================================
+
+    function gagalScan(errorMessage) {
+
+      console.log(
+        "Scanner:",
+        errorMessage
       );
 
     }
 
 
-    // =================================================
-    // KONFIRMASI YA / TIDAK
-    // =================================================
+    // ==========================================
+    // TOMBOL YA
+    // ==========================================
 
-    async function konfirmasiLengkap(
-      pilihan
-    ) {
+    function kirimData() {
 
       if (!qrHasil) {
 
         alert(
-          "QR Code belum terbaca."
+          "Belum ada QR Code yang terbaca."
         );
 
         return;
 
       }
-
-
-      const petugas =
-        document.getElementById(
-          "petugas"
-        ).value;
-
-
-      const ruangan =
-        document.getElementById(
-          "ruangan"
-        ).value;
-
-
-      const jumlah =
-        document.getElementById(
-          "jumlah"
-        ).value;
-
-
-      const transaksi =
-        document.getElementById(
-          "transaksi"
-        ).value;
-
-
-      // -----------------------------------------------
-      // VALIDASI
-      // -----------------------------------------------
-
-      if (!petugas) {
-
-        alert(
-          "Silakan pilih petugas terlebih dahulu."
-        );
-
-        return;
-
-      }
-
-
-      if (!ruangan) {
-
-        alert(
-          "Silakan pilih ruangan terlebih dahulu."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        !jumlah ||
-        Number(jumlah) < 1
-      ) {
-
-        alert(
-          "Jumlah harus minimal 1."
-        );
-
-        return;
-
-      }
-
 
       if (sedangMengirim) {
         return;
       }
 
-
       sedangMengirim = true;
 
 
-      tampilStatus(
-        "⏳ Mengirim data ke Google Sheet...",
-        "proses"
-      );
+      konfirmasi.style.display =
+        "none";
 
 
-      // -----------------------------------------------
-      // DATA
-      // -----------------------------------------------
+      status.className =
+        "status proses";
+
+      status.innerText =
+        "⏳ Mengirim data ke Google Sheet...";
+
+
+      // ======================================
+      // DATA TRANSAKSI
+      // ======================================
 
       const data =
         new URLSearchParams();
@@ -989,13 +467,13 @@
 
       data.append(
         "transaksi",
-        transaksi
+        "BARANG MASUK"
       );
 
 
       data.append(
         "petugas",
-        petugas
+        "TEST"
       );
 
 
@@ -1007,19 +485,19 @@
 
       data.append(
         "jumlah",
-        jumlah
+        "1"
       );
 
 
       data.append(
         "ruangan",
-        ruangan
+        "TEST"
       );
 
 
       data.append(
         "lengkap",
-        pilihan
+        "YA"
       );
 
 
@@ -1029,25 +507,25 @@
       );
 
 
-      // -----------------------------------------------
-      // KIRIM
-      // -----------------------------------------------
+      // ======================================
+      // KIRIM KE GOOGLE APPS SCRIPT
+      // ======================================
 
-      try {
+      fetch(
+        API_URL,
+        {
+          method: "POST",
+          body: data
+        }
+      )
 
-        const response =
-          await fetch(
-            API_URL,
-            {
-              method: "POST",
-              body: data
-            }
-          );
+      .then(function(response) {
 
+        return response.json();
 
-        const result =
-          await response.json();
+      })
 
+      .then(function(result) {
 
         console.log(
           "HASIL SERVER:",
@@ -1057,41 +535,38 @@
 
         if (result.berhasil) {
 
-          tampilStatus(
-            "✅ BERHASIL DISIMPAN\n" +
-            result.namaBarang +
-            " | " +
-            result.lengkap,
-            "berhasil"
-          );
+          status.className =
+            "status sukses";
+
+          status.innerText =
+            "✅ DATA BERHASIL DISIMPAN KE GOOGLE SHEET";
 
 
-          // Tutup konfirmasi
-          document.getElementById(
-            "konfirmasi"
-          ).style.display =
-            "none";
+          hasilScan.innerText =
+            qrHasil;
 
-
-          qrHasil = "";
-
-
-          // Tunggu sebentar
-          // lalu aktifkan scanner kembali
 
           setTimeout(
-            mulaiScanner,
-            1800
+            function() {
+
+              sedangMengirim =
+                false;
+
+              scanUlang();
+
+            },
+            2000
           );
 
 
         } else {
 
-          tampilStatus(
-            "❌ GAGAL\n" +
-            result.pesan,
-            "gagal"
-          );
+          status.className =
+            "status gagal";
+
+          status.innerText =
+            "❌ GAGAL: " +
+            result.pesan;
 
 
           sedangMengirim =
@@ -1099,8 +574,9 @@
 
         }
 
+      })
 
-      } catch (error) {
+      .catch(function(error) {
 
         console.error(
           "ERROR:",
@@ -1108,167 +584,112 @@
         );
 
 
-        tampilStatus(
-          "❌ GAGAL TERHUBUNG KE GOOGLE SHEET",
-          "gagal"
-        );
+        status.className =
+          "status gagal";
+
+        status.innerText =
+          "❌ GAGAL TERHUBUNG KE GOOGLE SHEET";
 
 
         sedangMengirim =
           false;
 
-      }
+      });
 
     }
 
 
-    // =================================================
-    // STATUS
-    // =================================================
+    // ==========================================
+    // TOMBOL TIDAK
+    // ==========================================
 
-    function tampilStatus(
-      pesan,
-      tipe
-    ) {
+    function batalKirim() {
 
-      const status =
-        document.getElementById(
-          "status"
-        );
-
-
-      if (!pesan) {
-
-        status.style.display =
-          "none";
-
-        status.className =
-          "status";
-
-        status.innerText =
-          "";
-
-        return;
-
-      }
-
-
-      status.style.display =
-        "block";
-
-
-      status.className =
-        "status " +
-        tipe;
-
-
-      status.innerText =
-        pesan;
-
-    }
-
-
-    // =================================================
-    // ERROR SCANNER
-    // =================================================
-
-    function gagalScan(
-      errorMessage
-    ) {
-
-      console.log(
-        "Scanner:",
-        errorMessage
-      );
-
-    }
-
-
-    // =================================================
-    // MULAI SCANNER
-    // =================================================
-
-    function mulaiScanner() {
-
-      sedangScan =
-        false;
-
-      sedangMengirim =
-        false;
-
-
-      document.getElementById(
-        "konfirmasi"
-      ).style.display =
+      konfirmasi.style.display =
         "none";
 
 
-      tampilStatus(
-        "",
-        ""
-      );
+      status.className =
+        "status gagal";
+
+      status.innerText =
+        "❌ Data tidak dikirim.";
 
 
-      scanner =
-        new Html5Qrcode(
-          "reader"
-        );
+      qrHasil = "";
 
 
-      const config = {
-
-        fps: 10,
-
-        qrbox: {
-          width: 250,
-          height: 250
-        }
-
-      };
+      hasilScan.innerText =
+        "Silakan scan QR kembali.";
 
 
-      scanner.start(
+      setTimeout(
+        function() {
 
-        {
-          facingMode:
-            "environment"
+          scanUlang();
+
         },
-
-        config,
-
-        hasilScan,
-
-        gagalScan
-
-      )
-
-      .catch(
-        function(error) {
-
-          console.error(
-            "Kamera gagal:",
-            error
-          );
-
-
-          document.getElementById(
-            "hasilScan"
-          ).innerText =
-            "❌ Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.";
-
-        }
+        1000
       );
 
     }
 
 
-    // =================================================
-    // MULAI APLIKASI
-    // =================================================
+    // ==========================================
+    // SCAN ULANG
+    // ==========================================
 
-    loadPetugas();
+    function scanUlang() {
 
-    loadRuangan();
+      if (scanner) {
+
+        try {
+
+          scanner.stop();
+
+        } catch (error) {
+
+          console.log(error);
+
+        }
+
+      }
+
+
+      scanner = null;
+
+      qrHasil = "";
+
+      sedangScan = false;
+
+
+      hasilScan.innerText =
+        "Menyiapkan kamera...";
+
+
+      konfirmasi.style.display =
+        "none";
+
+
+      status.className =
+        "status";
+
+
+      setTimeout(
+        function() {
+
+          mulaiScanner();
+
+        },
+        300
+      );
+
+    }
+
+
+    // ==========================================
+    // MULAI OTOMATIS
+    // ==========================================
 
     mulaiScanner();
 

@@ -10,9 +10,7 @@
   content="width=device-width, initial-scale=1.0"
 >
 
-<title>
-  CSSD Digital System
-</title>
+<title>CSSD Digital System</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
@@ -20,7 +18,7 @@
 
 /* =========================================================
    CSSD DIGITAL SYSTEM
-   FINAL UI
+   FINAL VERSION
 ========================================================= */
 
 *{
@@ -45,9 +43,9 @@ body{
   background:
     radial-gradient(
       circle at 50% -10%,
-      #18283A 0%,
-      #0B1117 35%,
-      #050709 75%
+      #1B2B3B 0%,
+      #0A1118 38%,
+      #040607 80%
     );
 
   -webkit-font-smoothing:antialiased;
@@ -55,22 +53,22 @@ body{
 
 
 /* =========================================================
-   VARIABLE
+   WARNA
 ========================================================= */
 
 :root{
 
-  --bg:#050709;
+  --bg:#040607;
 
-  --panel:#0D1318;
+  --panel:#0D141A;
 
-  --panel2:#121A21;
+  --panel2:#111A22;
 
-  --panel3:#17212A;
+  --panel3:#17232D;
 
-  --border:#263440;
+  --border:#263541;
 
-  --border-light:#344452;
+  --border2:#354756;
 
   --white:#F8FAFC;
 
@@ -78,19 +76,19 @@ body{
 
   --blue:#3B82F6;
 
-  --blue-light:#60A5FA;
+  --blue2:#60A5FA;
 
   --green:#22C55E;
 
-  --green-light:#4ADE80;
+  --green2:#4ADE80;
 
   --yellow:#F59E0B;
 
-  --yellow-light:#FBBF24;
+  --yellow2:#FBBF24;
 
   --red:#EF4444;
 
-  --red-light:#F87171;
+  --red2:#F87171;
 
 }
 
@@ -105,7 +103,7 @@ body{
 
   padding:
     24px
-    16px
+    15px
     22px;
 
   text-align:center;
@@ -113,13 +111,13 @@ body{
   background:
     linear-gradient(
       145deg,
-      #101B27,
-      #080D12
+      #101C28,
+      #070C11
     );
 
   border-bottom:
     1px solid
-    rgba(96,165,250,.16);
+    rgba(96,165,250,.18);
 
   box-shadow:
     0 12px 40px
@@ -134,8 +132,8 @@ body{
 
   position:absolute;
 
-  left:18%;
-  right:18%;
+  left:15%;
+  right:15%;
   bottom:-1px;
 
   height:1px;
@@ -144,7 +142,7 @@ body{
     linear-gradient(
       90deg,
       transparent,
-      rgba(59,130,246,.7),
+      rgba(59,130,246,.8),
       transparent
     );
 
@@ -156,10 +154,6 @@ body{
   font-size:21px;
 
   font-weight:900;
-
-  letter-spacing:.2px;
-
-  color:#FFFFFF;
 
   margin-bottom:7px;
 
@@ -183,25 +177,25 @@ body{
 
   font-size:11px;
 
-  font-weight:700;
+  font-weight:800;
 
   letter-spacing:.8px;
 
   color:
-    var(--blue-light);
+    var(--blue2);
 
 }
 
 
 .header-message{
 
-  margin-top:10px;
+  margin-top:9px;
+
+  color:#CBD5E1;
 
   font-size:11px;
 
-  line-height:1.7;
-
-  color:#CBD5E1;
+  line-height:1.6;
 
 }
 
@@ -232,8 +226,6 @@ body{
 
 .card{
 
-  position:relative;
-
   margin-bottom:13px;
 
   padding:16px;
@@ -247,8 +239,8 @@ body{
   background:
     linear-gradient(
       145deg,
-      rgba(18,26,33,.98),
-      rgba(9,13,17,.98)
+      rgba(18,27,35,.98),
+      rgba(8,12,16,.98)
     );
 
   box-shadow:
@@ -280,13 +272,13 @@ body{
 .card-title span{
 
   color:
-    var(--blue-light);
+    var(--blue2);
 
 }
 
 
 /* =========================================================
-   NOTIFICATION
+   NOTIFIKASI
 ========================================================= */
 
 .notifikasi{
@@ -295,17 +287,43 @@ body{
 
   margin-bottom:13px;
 
-  padding:13px 14px;
+  padding:15px;
 
-  border-radius:13px;
+  border-radius:14px;
 
   font-size:12px;
 
   font-weight:800;
 
-  line-height:1.55;
+  line-height:1.65;
 
   white-space:pre-line;
+
+  animation:
+    masukNotifikasi .25s ease;
+
+}
+
+
+@keyframes masukNotifikasi{
+
+  from{
+
+    opacity:0;
+
+    transform:
+      translateY(-8px);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:
+      translateY(0);
+
+  }
 
 }
 
@@ -326,35 +344,43 @@ body{
 
   border:
     1px solid
-    rgba(59,130,246,.30);
+    rgba(59,130,246,.35);
 
 }
 
 
 .notifikasi.sukses{
 
-  color:#86EFAC;
+  color:#BBF7D0;
 
   background:
-    rgba(34,197,94,.10);
+    linear-gradient(
+      145deg,
+      rgba(34,197,94,.18),
+      rgba(34,197,94,.06)
+    );
 
   border:
     1px solid
-    rgba(34,197,94,.30);
+    rgba(34,197,94,.60);
+
+  box-shadow:
+    0 8px 25px
+    rgba(34,197,94,.10);
 
 }
 
 
 .notifikasi.gagal{
 
-  color:#FCA5A5;
+  color:#FECACA;
 
   background:
     rgba(239,68,68,.10);
 
   border:
     1px solid
-    rgba(239,68,68,.30);
+    rgba(239,68,68,.45);
 
 }
 
@@ -363,30 +389,21 @@ body{
    SCANNER
 ========================================================= */
 
-.scanner-card{
-
-  padding-bottom:14px;
-
-}
-
-
 .scanner-frame{
-
-  position:relative;
 
   padding:8px;
 
   border:
     1px solid
-    rgba(96,165,250,.22);
+    rgba(96,165,250,.24);
 
   border-radius:17px;
 
-  background:#030506;
+  background:#020405;
 
   box-shadow:
     inset 0 0 25px
-    rgba(0,0,0,.65);
+    rgba(0,0,0,.7);
 
 }
 
@@ -415,13 +432,6 @@ body{
 }
 
 
-#reader img{
-
-  max-width:100%;
-
-}
-
-
 .scan-status{
 
   margin-top:11px;
@@ -430,14 +440,13 @@ body{
 
   text-align:center;
 
-  border-radius:11px;
-
-  background:
-    #0A1015;
-
   border:
     1px solid
     var(--border);
+
+  border-radius:11px;
+
+  background:#080E13;
 
   color:#CBD5E1;
 
@@ -456,14 +465,14 @@ body{
 
   padding:13px;
 
+  border:
+    1px solid
+    rgba(59,130,246,.30);
+
   border-radius:12px;
 
   background:
     rgba(59,130,246,.08);
-
-  border:
-    1px solid
-    rgba(59,130,246,.28);
 
 }
 
@@ -487,31 +496,15 @@ body{
 #hasilScan{
 
   color:
-    var(--blue-light);
+    var(--blue2);
 
   font-size:15px;
 
   font-weight:900;
 
-  line-height:1.4;
-
   word-break:break-word;
 
-}
-
-
-.btn-scan-ulang{
-
-  margin-top:9px;
-
-  background:
-    #151D24;
-
-  border:
-    1px solid
-    #334250;
-
-  color:#CBD5E1;
+  line-height:1.45;
 
 }
 
@@ -534,87 +527,64 @@ body{
 
 .btn-transaksi{
 
-  min-height:72px;
+  min-height:74px;
 
-  padding:10px 6px;
-
-  background:
-    #0A1015;
+  padding:9px 5px;
 
   border:
     1px solid
     var(--border);
 
+  border-radius:13px;
+
+  background:#080E13;
+
   color:#94A3B8;
 
-  font-size:11px;
-
-  line-height:1.35;
-
-}
-
-
-.btn-transaksi::first-line{
+  font-size:10px;
 
   font-weight:900;
+
+  line-height:1.45;
 
 }
 
 
 .btn-transaksi.masuk.aktif{
 
-  color:
-    #93C5FD;
+  color:#93C5FD;
 
   border-color:
     rgba(59,130,246,.75);
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(59,130,246,.18),
-      rgba(59,130,246,.06)
-    );
-
-  box-shadow:
-    0 0 20px
-    rgba(59,130,246,.08);
+    rgba(59,130,246,.13);
 
 }
 
 
 .btn-transaksi.steril.aktif{
 
-  color:
-    #86EFAC;
+  color:#86EFAC;
 
   border-color:
     rgba(34,197,94,.75);
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(34,197,94,.17),
-      rgba(34,197,94,.05)
-    );
+    rgba(34,197,94,.13);
 
 }
 
 
 .btn-transaksi.keluar.aktif{
 
-  color:
-    #FCD34D;
+  color:#FCD34D;
 
   border-color:
     rgba(245,158,11,.75);
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(245,158,11,.17),
-      rgba(245,158,11,.05)
-    );
+    rgba(245,158,11,.13);
 
 }
 
@@ -655,12 +625,9 @@ textarea{
 
   width:100%;
 
-  padding:12px;
-
   color:#F8FAFC;
 
-  background:
-    #080D11;
+  background:#080D11;
 
   border:
     1px solid
@@ -672,8 +639,7 @@ textarea{
 
   font-size:13px;
 
-  transition:
-    .18s ease;
+  padding:12px;
 
 }
 
@@ -692,16 +658,9 @@ textarea:focus{
 }
 
 
-select{
-
-  cursor:pointer;
-
-}
-
-
 option{
 
-  color:#FFFFFF;
+  color:white;
 
   background:#10161C;
 
@@ -723,30 +682,6 @@ textarea::placeholder,
 input::placeholder{
 
   color:#64748B;
-
-}
-
-
-/* =========================================================
-   TAMBAH RUANGAN
-========================================================= */
-
-.btn-tambah-ruangan{
-
-  margin-top:7px;
-
-  min-height:40px;
-
-  background:
-    #111920;
-
-  border:
-    1px solid
-    #334250;
-
-  color:#CBD5E1;
-
-  font-size:11px;
 
 }
 
@@ -775,18 +710,15 @@ input::placeholder{
 
   padding:0;
 
-  background:
-    #141C23;
+  background:#141C23;
 
   border:
     1px solid
     #334250;
 
-  color:#FFFFFF;
+  color:white;
 
   font-size:24px;
-
-  line-height:1;
 
 }
 
@@ -795,7 +727,7 @@ input::placeholder{
 
   height:47px;
 
-  padding:0 10px;
+  padding:0;
 
   text-align:center;
 
@@ -827,8 +759,7 @@ input::placeholder{
 
   min-height:47px;
 
-  background:
-    #0A1015;
+  background:#080E13;
 
   border:
     1px solid
@@ -868,14 +799,88 @@ input::placeholder{
 
 
 /* =========================================================
-   KIRIM
+   BUTTON
 ========================================================= */
+
+button{
+
+  width:100%;
+
+  min-height:44px;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  border:0;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-weight:900;
+
+  transition:
+    transform .12s ease,
+    opacity .15s ease;
+
+}
+
+
+button:active{
+
+  transform:
+    scale(.98);
+
+}
+
+
+button:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
+}
+
+
+.btn-scan-ulang{
+
+  margin-top:9px;
+
+  background:#151D24;
+
+  border:
+    1px solid
+    #334250;
+
+  color:#CBD5E1;
+
+}
+
+
+.btn-tambah-ruangan{
+
+  margin-top:7px;
+
+  background:#111920;
+
+  border:
+    1px solid
+    #334250;
+
+  color:#CBD5E1;
+
+  font-size:11px;
+
+}
+
 
 .btn-kirim{
 
-  min-height:54px;
+  min-height:55px;
 
-  margin-top:3px;
+  margin-top:2px;
 
   background:
     linear-gradient(
@@ -884,36 +889,55 @@ input::placeholder{
       #22C55E
     );
 
-  color:#FFFFFF;
-
-  border:0;
+  color:white;
 
   font-size:14px;
 
-  letter-spacing:.2px;
-
   box-shadow:
     0 8px 22px
-    rgba(34,197,94,.16);
+    rgba(34,197,94,.15);
 
 }
 
 
 .btn-kirim:disabled{
 
-  background:
-    #26312B;
-
-  color:
-    #6B7280;
-
-  box-shadow:none;
+  background:#26312B;
 
 }
 
 
 /* =========================================================
-   MODAL
+   PESAN DETAIL
+========================================================= */
+
+.pesan-detail{
+
+  margin-top:10px;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  background:#080E13;
+
+  border:
+    1px solid
+    var(--border);
+
+  color:#94A3B8;
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+}
+
+
+/* =========================================================
+   MODAL RUANGAN
 ========================================================= */
 
 .modal{
@@ -933,7 +957,7 @@ input::placeholder{
   padding:18px;
 
   background:
-    rgba(0,0,0,.80);
+    rgba(0,0,0,.82);
 
   backdrop-filter:
     blur(5px);
@@ -958,27 +982,27 @@ input::placeholder{
 
   border:
     1px solid
-    var(--border-light);
+    #354756;
 
   border-radius:18px;
 
   background:
     linear-gradient(
       145deg,
-      #141C23,
-      #0A0F13
+      #141D25,
+      #080D11
     );
 
   box-shadow:
-    0 20px 60px
-    rgba(0,0,0,.55);
+    0 25px 70px
+    rgba(0,0,0,.6);
 
 }
 
 
 .modal-title{
 
-  margin-bottom:16px;
+  margin-bottom:17px;
 
   text-align:center;
 
@@ -1007,17 +1031,16 @@ input::placeholder{
   background:
     var(--green);
 
-  color:#FFFFFF;
+  color:white;
 
 }
 
 
 .btn-tutup{
 
-  background:
-    #374151;
+  background:#374151;
 
-  color:#FFFFFF;
+  color:white;
 
 }
 
@@ -1029,7 +1052,7 @@ input::placeholder{
 .footer{
 
   padding:
-    16px
+    17px
     8px
     30px;
 
@@ -1046,10 +1069,10 @@ input::placeholder{
 
 .footer-name{
 
-  margin-top:9px;
+  margin-top:8px;
 
   color:
-    var(--blue-light);
+    var(--blue2);
 
   font-size:12px;
 
@@ -1072,50 +1095,6 @@ input::placeholder{
 
 
 /* =========================================================
-   BUTTON GLOBAL
-========================================================= */
-
-button{
-
-  width:100%;
-
-  min-height:44px;
-
-  padding:10px;
-
-  border-radius:10px;
-
-  cursor:pointer;
-
-  font-family:inherit;
-
-  font-weight:900;
-
-  transition:
-    transform .12s ease,
-    opacity .15s ease,
-    border-color .15s ease;
-
-}
-
-
-button:active{
-
-  transform:scale(.98);
-
-}
-
-
-button:disabled{
-
-  opacity:.45;
-
-  cursor:not-allowed;
-
-}
-
-
-/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -1124,6 +1103,7 @@ button:disabled{
   .container{
 
     padding-left:7px;
+
     padding-right:7px;
 
   }
@@ -1136,23 +1116,15 @@ button:disabled{
   }
 
 
-  .transaksi-grid{
-
-    gap:6px;
-
-  }
-
-
   .btn-transaksi{
 
-    min-height:68px;
+    min-height:70px;
 
-    font-size:10px;
+    font-size:9px;
 
   }
 
 }
-
 
 </style>
 
@@ -1206,7 +1178,7 @@ button:disabled{
 
 
 <!-- ======================================================
-     NOTIFIKASI
+     NOTIFIKASI GLOBAL
 ====================================================== -->
 
 <div
@@ -1220,7 +1192,7 @@ button:disabled{
      SCANNER
 ====================================================== -->
 
-<section class="card scanner-card">
+<section class="card">
 
   <div class="card-title">
 
@@ -1244,7 +1216,9 @@ button:disabled{
     id="status"
     class="scan-status"
   >
-    Menyiapkan kamera...
+
+    📷 Menyiapkan kamera...
+
   </div>
 
 
@@ -1284,7 +1258,7 @@ button:disabled{
 
 
 <!-- ======================================================
-     JENIS TRANSAKSI
+     TRANSAKSI
 ====================================================== -->
 
 <section class="card">
@@ -1553,6 +1527,19 @@ button:disabled{
 
 
 
+  <!-- PESAN DETAIL -->
+
+  <div
+    id="pesanDetail"
+    class="pesan-detail"
+  >
+
+    Lengkapi data sebelum dikirim.
+
+  </div>
+
+
+
   <!-- KIRIM -->
 
   <button
@@ -1668,7 +1655,7 @@ button:disabled{
         class="btn-simpan-ruangan"
       >
 
-        SIMPAN
+        💾 SIMPAN
 
       </button>
 
@@ -1695,7 +1682,7 @@ button:disabled{
 <script>
 
 /* =========================================================
-   GOOGLE APPS SCRIPT
+   API GOOGLE APPS SCRIPT
 ========================================================= */
 
 const API_URL =
@@ -1776,6 +1763,7 @@ function aturSapaan(){
 
   }
 
+
   $("greeting").innerText =
     sapaan;
 
@@ -1794,11 +1782,32 @@ function tampilNotifikasi(
   const box =
     $("notifikasi");
 
+
   box.className =
-    "notifikasi show " + tipe;
+    "notifikasi show " +
+    tipe;
+
 
   box.innerText =
     pesan;
+
+
+  /*
+   * Pastikan notifikasi terlihat
+   * walaupun posisi halaman sedang di bawah.
+   */
+
+  setTimeout(
+    function(){
+
+      box.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+      });
+
+    },
+    80
+  );
 
 }
 
@@ -1807,6 +1816,7 @@ function hapusNotifikasi(){
 
   $("notifikasi").className =
     "notifikasi";
+
 
   $("notifikasi").innerText =
     "";
@@ -1876,21 +1886,28 @@ async function loadMaster(){
     ).forEach(
       function(nama){
 
-        if(!nama) return;
+        if(!nama)
+          return;
+
 
         const option =
           document.createElement(
             "option"
           );
 
+
         option.value =
           nama;
+
 
         option.textContent =
           nama;
 
+
         $("petugas")
-          .appendChild(option);
+          .appendChild(
+            option
+          );
 
       }
     );
@@ -1907,37 +1924,31 @@ async function loadMaster(){
     ).forEach(
       function(nama){
 
-        if(!nama) return;
+        if(!nama)
+          return;
+
 
         const option =
           document.createElement(
             "option"
           );
 
+
         option.value =
           nama;
+
 
         option.textContent =
           nama;
 
+
         $("ruangan")
-          .appendChild(option);
+          .appendChild(
+            option
+          );
 
       }
     );
-
-
-    if(
-      !result.petugas ||
-      result.petugas.length === 0
-    ){
-
-      tampilNotifikasi(
-        "Data petugas masih kosong.",
-        "info"
-      );
-
-    }
 
 
   }
@@ -1952,12 +1963,13 @@ async function loadMaster(){
     $("petugas").innerHTML =
       '<option value="">Gagal memuat petugas</option>';
 
+
     $("ruangan").innerHTML =
       '<option value="">Gagal memuat ruangan</option>';
 
 
     tampilNotifikasi(
-      "GAGAL MEMUAT PETUGAS / RUANGAN\n" +
+      "❌ GAGAL MEMUAT PETUGAS / RUANGAN\n\n" +
       error.message,
       "gagal"
     );
@@ -1977,6 +1989,7 @@ function pilihTransaksi(
 
   transaksiDipilih =
     nilai;
+
 
   $("transaksi").value =
     nilai;
@@ -2090,7 +2103,8 @@ function ambilJumlah(){
     jumlah < 1
   ){
 
-    jumlah = 1;
+    jumlah =
+      1;
 
   }
 
@@ -2121,7 +2135,9 @@ $("btnKurang")
         ambilJumlah();
 
 
-      if(jumlah > 1){
+      if(
+        jumlah > 1
+      ){
 
         $("jumlah").value =
           jumlah - 1;
@@ -2133,7 +2149,7 @@ $("btnKurang")
 
 
 /* =========================================================
-   KONDISI
+   KONDISI SET
 ========================================================= */
 
 function pilihKondisi(
@@ -2142,6 +2158,7 @@ function pilihKondisi(
 
   lengkapDipilih =
     nilai;
+
 
   $("lengkap").value =
     nilai;
@@ -2158,23 +2175,28 @@ function pilihKondisi(
 
 
   if(
-    nilai === "YA"
+    nilai ===
+    "YA"
   ){
 
     $("btnLengkap")
       .classList
       .add("aktif");
 
+
+    $("pesanDetail").innerText =
+      "Set dinyatakan LENGKAP. Silakan periksa data lalu kirim.";
+
   }
-
-
-  if(
-    nilai === "TIDAK"
-  ){
+  else{
 
     $("btnTidakLengkap")
       .classList
       .add("aktif");
+
+
+    $("pesanDetail").innerText =
+      "Set dinyatakan TIDAK LENGKAP. Silakan isi keterangan kekurangan.";
 
   }
 
@@ -2189,7 +2211,9 @@ $("btnLengkap")
     "click",
     function(){
 
-      pilihKondisi("YA");
+      pilihKondisi(
+        "YA"
+      );
 
     }
   );
@@ -2200,14 +2224,16 @@ $("btnTidakLengkap")
     "click",
     function(){
 
-      pilihKondisi("TIDAK");
+      pilihKondisi(
+        "TIDAK"
+      );
 
     }
   );
 
 
 /* =========================================================
-   CEK KESIAPAN
+   CEK KIRIM
 ========================================================= */
 
 function periksaKesiapanKirim(){
@@ -2227,8 +2253,13 @@ function periksaKesiapanKirim(){
 
 async function mulaiScanner(){
 
-  if(sedangScan)
+  if(
+    sedangScan
+  ){
+
     return;
+
+  }
 
 
   sedangScan =
@@ -2288,7 +2319,7 @@ async function mulaiScanner(){
 
 
     tampilNotifikasi(
-      "Kamera tidak dapat digunakan.\n" +
+      "❌ KAMERA TIDAK DAPAT DIGUNAKAN\n\n" +
       "Pastikan izin kamera diberikan.",
       "gagal"
     );
@@ -2304,8 +2335,13 @@ async function mulaiScanner(){
 
 async function berhentiScanner(){
 
-  if(!sedangScan)
+  if(
+    !sedangScan
+  ){
+
     return;
+
+  }
 
 
   try{
@@ -2330,7 +2366,7 @@ async function berhentiScanner(){
 
 
 /* =========================================================
-   HASIL SCAN
+   QR BERHASIL
 ========================================================= */
 
 async function berhasilScan(
@@ -2353,8 +2389,13 @@ async function berhasilScan(
     ).trim();
 
 
-  if(!qrHasil)
+  if(
+    !qrHasil
+  ){
+
     return;
+
+  }
 
 
   await berhentiScanner();
@@ -2378,10 +2419,14 @@ async function berhasilScan(
     "✅ QR berhasil dibaca. Periksa data.";
 
 
+  $("pesanDetail").innerText =
+    "QR berhasil dibaca. Pilih petugas, ruangan, jumlah, dan kondisi set.";
+
+
   tampilNotifikasi(
-    "QR BERHASIL TERBACA\n\n" +
+    "✅ QR BERHASIL TERBACA\n\n" +
     qrHasil +
-    "\n\nJika salah, tekan SCAN ULANG.",
+    "\n\nJika QR salah, tekan SCAN ULANG.",
     "info"
   );
 
@@ -2413,6 +2458,7 @@ async function resetUntukScan(){
 
   qrHasil =
     "";
+
 
   lengkapDipilih =
     "";
@@ -2458,11 +2504,15 @@ async function resetUntukScan(){
     true;
 
 
+  $("pesanDetail").innerText =
+    "Menunggu QR Code berikutnya.";
+
+
   hapusNotifikasi();
 
 
   $("status").innerText =
-    "Menyiapkan kamera...";
+    "📷 Menyiapkan kamera...";
 
 
   await mulaiScanner();
@@ -2479,23 +2529,32 @@ $("btnKirim")
     "click",
     async function(){
 
-      if(sedangMengirim)
+      if(
+        sedangMengirim
+      ){
+
         return;
+
+      }
 
 
       const petugas =
         $("petugas").value;
 
+
       const transaksi =
         $("transaksi").value;
+
 
       const jumlah =
         Number(
           $("jumlah").value
         );
 
+
       const ruangan =
         $("ruangan").value;
+
 
       const keterangan =
         $("keterangan")
@@ -2503,10 +2562,14 @@ $("btnKirim")
           .trim();
 
 
-      if(!qrHasil){
+      /* QR */
+
+      if(
+        !qrHasil
+      ){
 
         tampilNotifikasi(
-          "QR Code belum dipindai.",
+          "❌ QR CODE BELUM DIPINDAI.",
           "gagal"
         );
 
@@ -2515,10 +2578,14 @@ $("btnKirim")
       }
 
 
-      if(!petugas){
+      /* PETUGAS */
+
+      if(
+        !petugas
+      ){
 
         tampilNotifikasi(
-          "Silakan pilih petugas.",
+          "❌ SILAKAN PILIH PETUGAS.",
           "gagal"
         );
 
@@ -2527,10 +2594,14 @@ $("btnKirim")
       }
 
 
-      if(!ruangan){
+      /* RUANGAN */
+
+      if(
+        !ruangan
+      ){
 
         tampilNotifikasi(
-          "Silakan pilih ruangan.",
+          "❌ SILAKAN PILIH RUANGAN.",
           "gagal"
         );
 
@@ -2538,6 +2609,8 @@ $("btnKirim")
 
       }
 
+
+      /* JUMLAH */
 
       if(
         !jumlah ||
@@ -2545,7 +2618,7 @@ $("btnKirim")
       ){
 
         tampilNotifikasi(
-          "Jumlah minimal 1.",
+          "❌ JUMLAH MINIMAL 1.",
           "gagal"
         );
 
@@ -2553,6 +2626,8 @@ $("btnKirim")
 
       }
 
+
+      /* KONDISI */
 
       if(
         lengkapDipilih !== "YA" &&
@@ -2560,7 +2635,7 @@ $("btnKirim")
       ){
 
         tampilNotifikasi(
-          "Silakan pilih LENGKAP atau TIDAK LENGKAP.",
+          "❌ SILAKAN PILIH LENGKAP ATAU TIDAK LENGKAP.",
           "gagal"
         );
 
@@ -2568,6 +2643,8 @@ $("btnKirim")
 
       }
 
+
+      /* MULAI KIRIM */
 
       sedangMengirim =
         true;
@@ -2578,9 +2655,13 @@ $("btnKirim")
 
 
       tampilNotifikasi(
-        "⏳ SEDANG MENGIRIM DATA...",
+        "⏳ SEDANG MENGIRIM DATA...\n\nMohon tunggu.",
         "info"
       );
+
+
+      $("status").innerText =
+        "⏳ Mengirim data ke Google Sheet...";
 
 
       const data =
@@ -2642,14 +2723,34 @@ $("btnKirim")
             API_URL,
             {
               method:"POST",
+
               body:data,
+
               cache:"no-store"
             }
           );
 
 
+        if(
+          !response.ok
+        ){
+
+          throw new Error(
+            "Server HTTP " +
+            response.status
+          );
+
+        }
+
+
         const result =
           await response.json();
+
+
+        console.log(
+          "HASIL SERVER:",
+          result
+        );
 
 
         if(
@@ -2664,28 +2765,78 @@ $("btnKirim")
         }
 
 
+        /* =================================================
+           SUKSES
+        ================================================= */
+
+        const nomor =
+          result.nomor ||
+          "-";
+
+
+        const sheet =
+          result.sheet ||
+          transaksi;
+
+
+        /*
+         * PENTING:
+         * Notifikasi sukses ditampilkan SEBELUM
+         * form dibersihkan.
+         */
+
         tampilNotifikasi(
-          "✅ BARANG TERKIRIM\n\n" +
+
+          "🎉 BARANG TERKIRIM!\n\n" +
+
           "Data berhasil masuk ke Google Sheet.\n\n" +
-          "Nomor: " +
+
+          "Nomor transaksi: " +
+          nomor +
+
+          "\nJenis: " +
+          transaksi +
+
+          "\nPetugas: " +
+          petugas +
+
+          "\nRuangan: " +
+          ruangan +
+
+          "\nJumlah: " +
+          jumlah +
+
+          "\nKondisi: " +
           (
-            result.nomor ||
-            "-"
-          ),
+            lengkapDipilih === "YA"
+              ? "LENGKAP"
+              : "TIDAK LENGKAP"
+          ) +
+
+          "\nSheet: " +
+          sheet,
+
           "sukses"
+
         );
 
 
         $("status").innerText =
-          "✅ DATA BERHASIL TERKIRIM";
+          "✅ BARANG TERKIRIM — DATA BERHASIL DISIMPAN";
 
 
-        sedangMengirim =
-          false;
+        $("pesanDetail").innerText =
+          "Data berhasil disimpan. Silakan lanjut scan barang berikutnya.";
 
+
+        /*
+         * Reset data transaksi
+         * TETAPI JANGAN menghapus notifikasi.
+         */
 
         qrHasil =
           "";
+
 
         lengkapDipilih =
           "";
@@ -2731,15 +2882,31 @@ $("btnKirim")
           true;
 
 
+        sedangMengirim =
+          false;
+
+
+        /*
+         * Berikan waktu cukup lama agar petugas
+         * melihat notifikasi sukses.
+         *
+         * Setelah 5 detik scanner kembali aktif.
+         */
+
         setTimeout(
           async function(){
 
             hapusNotifikasi();
 
+
+            $("status").innerText =
+              "📷 Menyiapkan scan berikutnya...";
+
+
             await mulaiScanner();
 
           },
-          1300
+          5000
         );
 
 
@@ -2747,7 +2914,7 @@ $("btnKirim")
       catch(error){
 
         console.error(
-          "KIRIM:",
+          "KIRIM DATA:",
           error
         );
 
@@ -2761,11 +2928,20 @@ $("btnKirim")
 
 
         tampilNotifikasi(
+
           "❌ GAGAL MENGIRIM DATA\n\n" +
+
           error.message +
+
           "\n\nData belum tersimpan.",
+
           "gagal"
+
         );
+
+
+        $("status").innerText =
+          "❌ GAGAL MENGIRIM DATA";
 
       }
 
@@ -2785,6 +2961,7 @@ $("btnTambahRuangan")
       $("pinAdmin").value =
         "";
 
+
       $("namaRuangan").value =
         "";
 
@@ -2796,6 +2973,10 @@ $("btnTambahRuangan")
     }
   );
 
+
+/* =========================================================
+   TUTUP MODAL
+========================================================= */
 
 $("btnTutupRuangan")
   .addEventListener(
@@ -2831,7 +3012,9 @@ $("btnSimpanRuangan")
           .trim();
 
 
-      if(!pin){
+      if(
+        !pin
+      ){
 
         alert(
           "PIN Admin belum diisi."
@@ -2842,7 +3025,9 @@ $("btnSimpanRuangan")
       }
 
 
-      if(!namaRuangan){
+      if(
+        !namaRuangan
+      ){
 
         alert(
           "Nama ruangan belum diisi."
@@ -2890,7 +3075,9 @@ $("btnSimpanRuangan")
             API_URL,
             {
               method:"POST",
+
               body:data,
+
               cache:"no-store"
             }
           );
@@ -2918,9 +3105,13 @@ $("btnSimpanRuangan")
 
 
         tampilNotifikasi(
+
           "✅ RUANGAN BERHASIL DITAMBAHKAN\n\n" +
+
           result.ruangan,
+
           "sukses"
+
         );
 
 
@@ -2930,13 +3121,18 @@ $("btnSimpanRuangan")
         $("ruangan").value =
           result.ruangan;
 
+
       }
       catch(error){
 
         tampilNotifikasi(
+
           "❌ GAGAL MENAMBAH RUANGAN\n\n" +
+
           error.message,
+
           "gagal"
+
         );
 
       }
@@ -2947,14 +3143,14 @@ $("btnSimpanRuangan")
 
 
       this.innerText =
-        "SIMPAN";
+        "💾 SIMPAN";
 
     }
   );
 
 
 /* =========================================================
-   MODAL
+   KLIK LUAR MODAL
 ========================================================= */
 
 $("modalRuangan")
@@ -2963,7 +3159,8 @@ $("modalRuangan")
     function(event){
 
       if(
-        event.target === this
+        event.target ===
+        this
       ){
 
         this.classList
@@ -2986,7 +3183,6 @@ loadMaster();
 mulaiScanner();
 
 </script>
-
 
 </body>
 

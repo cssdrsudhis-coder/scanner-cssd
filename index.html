@@ -2,550 +2,1348 @@
 <html lang="id">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scanner QR CSSD</title>
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+  CSSD Digital System
+</title>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
 <style>
 
+/* =========================================================
+   CSSD DIGITAL SYSTEM
+   FINAL UI
+========================================================= */
+
 *{
   box-sizing:border-box;
 }
 
-:root{
-  --bg:#070A0D;
-  --panel:#111518;
-  --panel2:#171C20;
-  --border:#27313A;
-  --white:#FFFFFF;
-  --muted:#9CA3AF;
-  --blue:#2F80ED;
-  --green:#22C55E;
-  --red:#EF5350;
-  --yellow:#F5B900;
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
   min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-  color:white;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:#F8FAFC;
+
   background:
-    radial-gradient(circle at top,#111827 0%,#070A0D 45%,#050608 100%);
+    radial-gradient(
+      circle at 50% -10%,
+      #18283A 0%,
+      #0B1117 35%,
+      #050709 75%
+    );
+
+  -webkit-font-smoothing:antialiased;
 }
 
-/* ================= HEADER ================= */
+
+/* =========================================================
+   VARIABLE
+========================================================= */
+
+:root{
+
+  --bg:#050709;
+
+  --panel:#0D1318;
+
+  --panel2:#121A21;
+
+  --panel3:#17212A;
+
+  --border:#263440;
+
+  --border-light:#344452;
+
+  --white:#F8FAFC;
+
+  --muted:#94A3B8;
+
+  --blue:#3B82F6;
+
+  --blue-light:#60A5FA;
+
+  --green:#22C55E;
+
+  --green-light:#4ADE80;
+
+  --yellow:#F59E0B;
+
+  --yellow-light:#FBBF24;
+
+  --red:#EF4444;
+
+  --red-light:#F87171;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
-  padding:22px 14px 20px;
+
+  position:relative;
+
+  padding:
+    24px
+    16px
+    22px;
+
   text-align:center;
-  background:linear-gradient(145deg,#0D1624,#070A0D);
-  border-bottom:1px solid var(--border);
+
+  background:
+    linear-gradient(
+      145deg,
+      #101B27,
+      #080D12
+    );
+
+  border-bottom:
+    1px solid
+    rgba(96,165,250,.16);
+
+  box-shadow:
+    0 12px 40px
+    rgba(0,0,0,.35);
+
 }
+
+
+.header::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:18%;
+  right:18%;
+  bottom:-1px;
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(59,130,246,.7),
+      transparent
+    );
+
+}
+
 
 .greeting{
-  font-size:22px;
+
+  font-size:21px;
+
   font-weight:900;
-  margin-bottom:8px;
+
+  letter-spacing:.2px;
+
+  color:#FFFFFF;
+
+  margin-bottom:7px;
+
 }
+
 
 .header-title{
-  font-size:18px;
+
+  font-size:19px;
+
   font-weight:900;
+
+  letter-spacing:1px;
+
 }
+
 
 .header-subtitle{
-  margin-top:5px;
-  font-size:12px;
-  color:#60A5FA;
-  font-weight:bold;
+
+  margin-top:6px;
+
+  font-size:11px;
+
+  font-weight:700;
+
+  letter-spacing:.8px;
+
+  color:
+    var(--blue-light);
+
 }
+
 
 .header-message{
+
   margin-top:10px;
-  font-size:12px;
+
+  font-size:11px;
+
   line-height:1.7;
+
   color:#CBD5E1;
+
 }
 
-/* ================= CONTAINER ================= */
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container{
+
   width:100%;
-  max-width:520px;
-  margin:15px auto;
-  padding:0 9px 25px;
+
+  max-width:540px;
+
+  margin:0 auto;
+
+  padding:
+    15px
+    10px
+    25px;
+
 }
 
-/* ================= CARD ================= */
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .card{
-  background:linear-gradient(145deg,#12171B,#0D1114);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:15px;
+
+  position:relative;
+
   margin-bottom:13px;
-  box-shadow:0 8px 25px rgba(0,0,0,.28);
+
+  padding:16px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(18,26,33,.98),
+      rgba(9,13,17,.98)
+    );
+
+  box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.25);
+
 }
+
 
 .card-title{
-  margin:0 0 13px;
-  font-size:15px;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:14px;
+
+  font-size:14px;
+
   font-weight:900;
+
+  letter-spacing:.5px;
+
 }
+
 
 .card-title span{
-  color:#60A5FA;
+
+  color:
+    var(--blue-light);
+
 }
 
-/* ================= QR ================= */
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notifikasi{
+
+  display:none;
+
+  margin-bottom:13px;
+
+  padding:13px 14px;
+
+  border-radius:13px;
+
+  font-size:12px;
+
+  font-weight:800;
+
+  line-height:1.55;
+
+  white-space:pre-line;
+
+}
+
+
+.notifikasi.show{
+
+  display:block;
+
+}
+
+
+.notifikasi.info{
+
+  color:#93C5FD;
+
+  background:
+    rgba(59,130,246,.10);
+
+  border:
+    1px solid
+    rgba(59,130,246,.30);
+
+}
+
+
+.notifikasi.sukses{
+
+  color:#86EFAC;
+
+  background:
+    rgba(34,197,94,.10);
+
+  border:
+    1px solid
+    rgba(34,197,94,.30);
+
+}
+
+
+.notifikasi.gagal{
+
+  color:#FCA5A5;
+
+  background:
+    rgba(239,68,68,.10);
+
+  border:
+    1px solid
+    rgba(239,68,68,.30);
+
+}
+
+
+/* =========================================================
+   SCANNER
+========================================================= */
+
+.scanner-card{
+
+  padding-bottom:14px;
+
+}
+
+
+.scanner-frame{
+
+  position:relative;
+
+  padding:8px;
+
+  border:
+    1px solid
+    rgba(96,165,250,.22);
+
+  border-radius:17px;
+
+  background:#030506;
+
+  box-shadow:
+    inset 0 0 25px
+    rgba(0,0,0,.65);
+
+}
+
 
 #reader{
+
   width:100%;
-  max-width:330px;
-  margin:auto;
+
+  max-width:360px;
+
+  margin:0 auto;
+
   overflow:hidden;
-  border:2px solid #1E293B;
-  border-radius:14px;
-  background:#000;
+
+  border-radius:12px;
+
 }
+
 
 #reader video{
+
   width:100%!important;
+
   border-radius:12px;
+
 }
+
+
+#reader img{
+
+  max-width:100%;
+
+}
+
 
 .scan-status{
-  margin-top:10px;
+
+  margin-top:11px;
+
   padding:11px;
+
   text-align:center;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#0B0F12;
+
+  border-radius:11px;
+
+  background:
+    #0A1015;
+
+  border:
+    1px solid
+    var(--border);
+
   color:#CBD5E1;
+
   font-size:12px;
-  font-weight:bold;
+
+  font-weight:800;
+
   line-height:1.5;
+
 }
+
 
 .hasil-scan{
+
   margin-top:10px;
-  padding:12px;
-  background:rgba(47,128,237,.09);
-  border:1px solid rgba(47,128,237,.3);
-  border-radius:10px;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  background:
+    rgba(59,130,246,.08);
+
+  border:
+    1px solid
+    rgba(59,130,246,.28);
+
 }
+
 
 .hasil-label{
-  color:var(--muted);
-  font-size:10px;
-  font-weight:bold;
+
   margin-bottom:5px;
+
+  color:
+    var(--muted);
+
+  font-size:9px;
+
+  font-weight:900;
+
+  letter-spacing:.8px;
+
 }
+
 
 #hasilScan{
-  color:#60A5FA;
-  font-size:16px;
+
+  color:
+    var(--blue-light);
+
+  font-size:15px;
+
   font-weight:900;
+
+  line-height:1.4;
+
   word-break:break-word;
+
 }
 
-/* ================= BUTTON ================= */
 
-button{
-  width:100%;
-  min-height:46px;
-  padding:11px;
-  border:1px solid transparent;
-  border-radius:10px;
-  font-size:13px;
-  font-weight:900;
-  cursor:pointer;
-  transition:.18s;
+.btn-scan-ulang{
+
+  margin-top:9px;
+
+  background:
+    #151D24;
+
+  border:
+    1px solid
+    #334250;
+
+  color:#CBD5E1;
+
 }
 
-button:active{
-  transform:scale(.98);
-}
 
-button:disabled{
-  opacity:.45;
-  cursor:not-allowed;
-}
-
-/* ================= TRANSAKSI ================= */
+/* =========================================================
+   TRANSAKSI
+========================================================= */
 
 .transaksi-grid{
+
   display:grid;
-  grid-template-columns:1fr;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:8px;
+
 }
+
 
 .btn-transaksi{
-  background:#0B0F12;
-  border-color:var(--border);
-  color:#CBD5E1;
+
+  min-height:72px;
+
+  padding:10px 6px;
+
+  background:
+    #0A1015;
+
+  border:
+    1px solid
+    var(--border);
+
+  color:#94A3B8;
+
+  font-size:11px;
+
+  line-height:1.35;
+
 }
+
+
+.btn-transaksi::first-line{
+
+  font-weight:900;
+
+}
+
 
 .btn-transaksi.masuk.aktif{
-  background:rgba(47,128,237,.18);
-  border-color:var(--blue);
-  color:#60A5FA;
+
+  color:
+    #93C5FD;
+
+  border-color:
+    rgba(59,130,246,.75);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(59,130,246,.18),
+      rgba(59,130,246,.06)
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(59,130,246,.08);
+
 }
+
 
 .btn-transaksi.steril.aktif{
-  background:rgba(34,197,94,.17);
-  border-color:var(--green);
-  color:#4ADE80;
+
+  color:
+    #86EFAC;
+
+  border-color:
+    rgba(34,197,94,.75);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(34,197,94,.17),
+      rgba(34,197,94,.05)
+    );
+
 }
+
 
 .btn-transaksi.keluar.aktif{
-  background:rgba(245,185,0,.16);
-  border-color:var(--yellow);
-  color:#FACC15;
+
+  color:
+    #FCD34D;
+
+  border-color:
+    rgba(245,158,11,.75);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245,158,11,.17),
+      rgba(245,158,11,.05)
+    );
+
 }
 
-/* ================= FORM ================= */
+
+/* =========================================================
+   FORM
+========================================================= */
 
 .field{
-  margin-bottom:13px;
+
+  margin-bottom:14px;
+
 }
 
+
 label{
+
   display:block;
+
   margin-bottom:6px;
-  color:#D1D5DB;
-  font-size:11px;
+
+  color:#CBD5E1;
+
+  font-size:10px;
+
   font-weight:900;
+
+  letter-spacing:.7px;
+
   text-transform:uppercase;
-  letter-spacing:.5px;
+
 }
+
 
 select,
 input,
 textarea{
+
   width:100%;
+
   padding:12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#0B0F12;
-  color:white;
-  font-size:14px;
+
+  color:#F8FAFC;
+
+  background:
+    #080D11;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:11px;
+
   outline:none;
+
+  font-size:13px;
+
+  transition:
+    .18s ease;
+
 }
+
 
 select:focus,
 input:focus,
 textarea:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 2px rgba(47,128,237,.12);
+
+  border-color:
+    rgba(59,130,246,.75);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59,130,246,.08);
+
 }
+
+
+select{
+
+  cursor:pointer;
+
+}
+
 
 option{
-  background:#111518;
-  color:white;
+
+  color:#FFFFFF;
+
+  background:#10161C;
+
 }
+
 
 textarea{
-  min-height:85px;
+
+  min-height:88px;
+
   resize:vertical;
+
+  line-height:1.5;
+
 }
 
-/* ================= JUMLAH ================= */
 
-.jumlah-control{
-  display:grid;
-  grid-template-columns:55px 1fr 55px;
-  gap:7px;
+textarea::placeholder,
+input::placeholder{
+
+  color:#64748B;
+
 }
 
-.jumlah-btn{
-  height:48px;
-  background:#171C20;
-  border-color:var(--border);
-  color:white;
-  font-size:23px;
-}
 
-#jumlah{
-  height:48px;
-  text-align:center;
-  font-size:19px;
-  font-weight:900;
-}
-
-/* ================= RUANGAN ================= */
+/* =========================================================
+   TAMBAH RUANGAN
+========================================================= */
 
 .btn-tambah-ruangan{
+
   margin-top:7px;
-  background:#171C20;
-  border-color:#374151;
-  color:#CBD5E1;
+
   min-height:40px;
-  font-size:12px;
+
+  background:
+    #111920;
+
+  border:
+    1px solid
+    #334250;
+
+  color:#CBD5E1;
+
+  font-size:11px;
+
 }
 
-/* ================= KONDISI ================= */
+
+/* =========================================================
+   JUMLAH
+========================================================= */
+
+.jumlah-control{
+
+  display:grid;
+
+  grid-template-columns:
+    54px
+    1fr
+    54px;
+
+  gap:7px;
+
+}
+
+
+.jumlah-btn{
+
+  height:47px;
+
+  padding:0;
+
+  background:
+    #141C23;
+
+  border:
+    1px solid
+    #334250;
+
+  color:#FFFFFF;
+
+  font-size:24px;
+
+  line-height:1;
+
+}
+
+
+#jumlah{
+
+  height:47px;
+
+  padding:0 10px;
+
+  text-align:center;
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================================================
+   KONDISI
+========================================================= */
 
 .kondisi-grid{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:8px;
+
 }
+
 
 .btn-kondisi{
-  background:#0B0F12;
-  border-color:var(--border);
+
+  min-height:47px;
+
+  background:
+    #0A1015;
+
+  border:
+    1px solid
+    var(--border);
+
   color:#CBD5E1;
+
+  font-size:12px;
+
 }
+
 
 .btn-kondisi.lengkap.aktif{
-  background:rgba(34,197,94,.18);
-  border-color:var(--green);
-  color:#4ADE80;
+
+  color:#86EFAC;
+
+  border-color:
+    rgba(34,197,94,.8);
+
+  background:
+    rgba(34,197,94,.13);
+
 }
+
 
 .btn-kondisi.tidak.aktif{
-  background:rgba(239,83,80,.18);
-  border-color:var(--red);
-  color:#F87171;
+
+  color:#FCA5A5;
+
+  border-color:
+    rgba(239,68,68,.8);
+
+  background:
+    rgba(239,68,68,.13);
+
 }
 
-/* ================= KIRIM ================= */
+
+/* =========================================================
+   KIRIM
+========================================================= */
 
 .btn-kirim{
-  min-height:53px;
-  background:linear-gradient(135deg,#15803D,#22C55E);
-  color:white;
+
+  min-height:54px;
+
+  margin-top:3px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #15803D,
+      #22C55E
+    );
+
+  color:#FFFFFF;
+
   border:0;
-  font-size:15px;
+
+  font-size:14px;
+
+  letter-spacing:.2px;
+
+  box-shadow:
+    0 8px 22px
+    rgba(34,197,94,.16);
+
 }
 
-/* ================= SCAN ULANG ================= */
 
-.btn-scan-ulang{
-  margin-top:8px;
-  background:#171C20;
-  border-color:#475569;
-  color:#CBD5E1;
+.btn-kirim:disabled{
+
+  background:
+    #26312B;
+
+  color:
+    #6B7280;
+
+  box-shadow:none;
+
 }
 
-/* ================= NOTIFIKASI ================= */
 
-.notifikasi{
-  display:none;
-  padding:13px;
-  margin-bottom:13px;
-  border-radius:11px;
-  font-size:13px;
-  font-weight:900;
-  line-height:1.5;
-  white-space:pre-line;
-}
-
-.notifikasi.show{
-  display:block;
-}
-
-.notifikasi.sukses{
-  background:rgba(34,197,94,.13);
-  border:1px solid rgba(34,197,94,.4);
-  color:#4ADE80;
-}
-
-.notifikasi.gagal{
-  background:rgba(239,83,80,.13);
-  border:1px solid rgba(239,83,80,.4);
-  color:#F87171;
-}
-
-.notifikasi.info{
-  background:rgba(47,128,237,.13);
-  border:1px solid rgba(47,128,237,.4);
-  color:#60A5FA;
-}
-
-/* ================= MODAL ================= */
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
+
   display:none;
+
   position:fixed;
+
   inset:0;
+
   z-index:9999;
+
   align-items:center;
+
   justify-content:center;
+
   padding:18px;
-  background:rgba(0,0,0,.78);
+
+  background:
+    rgba(0,0,0,.80);
+
+  backdrop-filter:
+    blur(5px);
+
 }
+
 
 .modal.show{
+
   display:flex;
+
 }
+
 
 .modal-box{
+
   width:100%;
-  max-width:390px;
+
+  max-width:400px;
+
   padding:18px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:#111518;
+
+  border:
+    1px solid
+    var(--border-light);
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #141C23,
+      #0A0F13
+    );
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.55);
+
 }
+
 
 .modal-title{
+
+  margin-bottom:16px;
+
   text-align:center;
-  margin-bottom:15px;
-  font-size:17px;
+
+  font-size:16px;
+
   font-weight:900;
+
 }
+
 
 .modal-grid{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
   gap:8px;
+
 }
+
 
 .btn-simpan-ruangan{
-  background:var(--green);
-  color:white;
+
+  background:
+    var(--green);
+
+  color:#FFFFFF;
+
 }
+
 
 .btn-tutup{
-  background:#374151;
-  color:white;
+
+  background:
+    #374151;
+
+  color:#FFFFFF;
+
 }
 
-/* ================= FOOTER ================= */
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
-  padding:15px 8px 30px;
+
+  padding:
+    16px
+    8px
+    30px;
+
   text-align:center;
-  color:#9CA3AF;
-  font-size:12px;
-  line-height:1.7;
+
+  color:#64748B;
+
+  font-size:11px;
+
+  line-height:1.8;
+
 }
+
 
 .footer-name{
-  margin-top:15px;
-  color:#60A5FA;
-  font-size:13px;
+
+  margin-top:9px;
+
+  color:
+    var(--blue-light);
+
+  font-size:12px;
+
   font-weight:900;
-  letter-spacing:.6px;
+
+  letter-spacing:1px;
+
 }
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
 
 .hidden{
+
   display:none!important;
+
 }
 
+
+/* =========================================================
+   BUTTON GLOBAL
+========================================================= */
+
+button{
+
+  width:100%;
+
+  min-height:44px;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  font-weight:900;
+
+  transition:
+    transform .12s ease,
+    opacity .15s ease,
+    border-color .15s ease;
+
+}
+
+
+button:active{
+
+  transform:scale(.98);
+
+}
+
+
+button:disabled{
+
+  opacity:.45;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:380px){
+
+  .container{
+
+    padding-left:7px;
+    padding-right:7px;
+
+  }
+
+
+  .card{
+
+    padding:13px;
+
+  }
+
+
+  .transaksi-grid{
+
+    gap:6px;
+
+  }
+
+
+  .btn-transaksi{
+
+    min-height:68px;
+
+    font-size:10px;
+
+  }
+
+}
+
+
 </style>
+
 </head>
 
 
 <body>
 
 
+<!-- ======================================================
+     HEADER
+====================================================== -->
+
 <header class="header">
 
-  <div id="greeting" class="greeting">
+  <div
+    id="greeting"
+    class="greeting"
+  >
     Selamat bekerja
   </div>
 
+
   <div class="header-title">
-    SCANNER QR CSSD
+
+    CSSD DIGITAL SYSTEM
+
   </div>
+
 
   <div class="header-subtitle">
+
     RSUD HARAPAN INSAN SENDAWAR
+
   </div>
 
+
   <div class="header-message">
+
     Selamat bekerja 🙏
     <br>
     Semoga selalu diberikan kesehatan
+
   </div>
 
 </header>
 
 
+
 <main class="container">
 
 
-<div id="notifikasi" class="notifikasi"></div>
+<!-- ======================================================
+     NOTIFIKASI
+====================================================== -->
+
+<div
+  id="notifikasi"
+  class="notifikasi"
+></div>
 
 
-<!-- ================= SCAN ================= -->
 
-<section class="card">
+<!-- ======================================================
+     SCANNER
+====================================================== -->
+
+<section class="card scanner-card">
 
   <div class="card-title">
-    📷 <span>SCAN QR CODE</span>
+
+    📷
+
+    <span>
+      SCAN QR CODE
+    </span>
+
   </div>
 
-  <div id="reader"></div>
 
-  <div id="status" class="scan-status">
+  <div class="scanner-frame">
+
+    <div id="reader"></div>
+
+  </div>
+
+
+  <div
+    id="status"
+    class="scan-status"
+  >
     Menyiapkan kamera...
   </div>
 
-  <div id="hasilBox" class="hasil-scan hidden">
+
+  <div
+    id="hasilBox"
+    class="hasil-scan hidden"
+  >
 
     <div class="hasil-label">
+
       HASIL SCAN
+
     </div>
 
+
     <div id="hasilScan">
+
       -
+
     </div>
 
   </div>
+
 
   <button
     type="button"
     id="btnScanUlang"
     class="btn-scan-ulang hidden"
   >
-    SCAN ULANG
+
+    🔄 SCAN ULANG
+
   </button>
 
 </section>
 
 
-<!-- ================= TRANSAKSI ================= -->
+
+<!-- ======================================================
+     JENIS TRANSAKSI
+====================================================== -->
 
 <section class="card">
 
   <div class="card-title">
-    🔄 <span>JENIS TRANSAKSI</span>
+
+    🔄
+
+    <span>
+      JENIS TRANSAKSI
+    </span>
+
   </div>
 
+
   <div class="transaksi-grid">
+
 
     <button
       type="button"
       id="transaksiMasuk"
       class="btn-transaksi masuk aktif"
     >
+
+      📦
+      <br>
       BARANG MASUK
+
     </button>
+
 
     <button
       type="button"
       id="transaksiSteril"
       class="btn-transaksi steril"
     >
+
+      ♨️
+      <br>
       PROSES STERIL
+
     </button>
+
 
     <button
       type="button"
       id="transaksiKeluar"
       class="btn-transaksi keluar"
     >
+
+      📤
+      <br>
       BARANG KELUAR
+
     </button>
 
+
   </div>
+
 
   <input
     type="hidden"
@@ -556,13 +1354,23 @@ textarea{
 </section>
 
 
-<!-- ================= DATA ================= -->
+
+<!-- ======================================================
+     DATA TRANSAKSI
+====================================================== -->
 
 <section class="card">
 
   <div class="card-title">
-    📝 <span>DATA TRANSAKSI</span>
+
+    📝
+
+    <span>
+      DATA TRANSAKSI
+    </span>
+
   </div>
+
 
 
   <!-- PETUGAS -->
@@ -570,18 +1378,24 @@ textarea{
   <div class="field">
 
     <label for="petugas">
-      PETUGAS
+
+      👤 PETUGAS
+
     </label>
+
 
     <select id="petugas">
 
       <option value="">
+
         Memuat petugas...
+
       </option>
 
     </select>
 
   </div>
+
 
 
   <!-- RUANGAN -->
@@ -589,26 +1403,35 @@ textarea{
   <div class="field">
 
     <label for="ruangan">
-      RUANGAN
+
+      🏥 RUANGAN
+
     </label>
+
 
     <select id="ruangan">
 
       <option value="">
+
         Memuat ruangan...
+
       </option>
 
     </select>
+
 
     <button
       type="button"
       id="btnTambahRuangan"
       class="btn-tambah-ruangan"
     >
-      + TAMBAH RUANGAN
+
+      ➕ TAMBAH RUANGAN
+
     </button>
 
   </div>
+
 
 
   <!-- JUMLAH -->
@@ -616,18 +1439,25 @@ textarea{
   <div class="field">
 
     <label>
-      JUMLAH
+
+      🔢 JUMLAH
+
     </label>
 
+
     <div class="jumlah-control">
+
 
       <button
         type="button"
         id="btnKurang"
         class="jumlah-btn"
       >
+
         −
+
       </button>
+
 
       <input
         id="jumlah"
@@ -636,17 +1466,22 @@ textarea{
         value="1"
       >
 
+
       <button
         type="button"
         id="btnTambah"
         class="jumlah-btn"
       >
+
         +
+
       </button>
+
 
     </div>
 
   </div>
+
 
 
   <!-- KONDISI -->
@@ -654,28 +1489,39 @@ textarea{
   <div class="field">
 
     <label>
-      KONDISI SET
+
+      🧰 KONDISI SET
+
     </label>
 
+
     <div class="kondisi-grid">
+
 
       <button
         type="button"
         id="btnLengkap"
         class="btn-kondisi lengkap"
       >
-        LENGKAP
+
+        ✅ LENGKAP
+
       </button>
+
 
       <button
         type="button"
         id="btnTidakLengkap"
         class="btn-kondisi tidak"
       >
-        TIDAK LENGKAP
+
+        ❌ TIDAK LENGKAP
+
       </button>
 
+
     </div>
+
 
     <input
       type="hidden"
@@ -686,20 +1532,25 @@ textarea{
   </div>
 
 
+
   <!-- KETERANGAN -->
 
   <div class="field">
 
     <label for="keterangan">
-      KETERANGAN
+
+      📝 KETERANGAN
+
     </label>
+
 
     <textarea
       id="keterangan"
-      placeholder="Tulis keterangan atau kekurangan instrumen"
+      placeholder="Contoh: Kurang 1 pinset anatomis, klem jaringan, dll."
     ></textarea>
 
   </div>
+
 
 
   <!-- KIRIM -->
@@ -710,24 +1561,40 @@ textarea{
     class="btn-kirim"
     disabled
   >
+
     📤 KIRIM DATA
+
   </button>
+
 
 </section>
 
 
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
 <footer class="footer">
 
   <div>
+
     Selamat bekerja 🙏
+
   </div>
+
 
   <div>
+
     Semoga selalu diberikan kesehatan
+
   </div>
 
+
   <div class="footer-name">
+
     M DWI CAHYANTO
+
   </div>
 
 </footer>
@@ -736,21 +1603,34 @@ textarea{
 </main>
 
 
-<!-- ================= MODAL RUANGAN ================= -->
 
-<div id="modalRuangan" class="modal">
+<!-- ======================================================
+     MODAL TAMBAH RUANGAN
+====================================================== -->
+
+<div
+  id="modalRuangan"
+  class="modal"
+>
 
   <div class="modal-box">
 
+
     <div class="modal-title">
-      TAMBAH RUANGAN
+
+      ➕ TAMBAH RUANGAN
+
     </div>
+
 
     <div class="field">
 
       <label for="pinAdmin">
+
         PIN ADMIN
+
       </label>
+
 
       <input
         id="pinAdmin"
@@ -760,11 +1640,15 @@ textarea{
 
     </div>
 
+
     <div class="field">
 
       <label for="namaRuangan">
+
         NAMA RUANGAN
+
       </label>
+
 
       <input
         id="namaRuangan"
@@ -774,23 +1658,31 @@ textarea{
 
     </div>
 
+
     <div class="modal-grid">
+
 
       <button
         type="button"
         id="btnSimpanRuangan"
         class="btn-simpan-ruangan"
       >
+
         SIMPAN
+
       </button>
+
 
       <button
         type="button"
         id="btnTutupRuangan"
         class="btn-tutup"
       >
+
         TUTUP
+
       </button>
+
 
     </div>
 
@@ -799,262 +1691,273 @@ textarea{
 </div>
 
 
+
 <script>
 
-/* ======================================================
-   API
-====================================================== */
+/* =========================================================
+   GOOGLE APPS SCRIPT
+========================================================= */
 
 const API_URL =
 "https://script.google.com/macros/s/AKfycbw1pGmXUD9Q3v4k6ttlFlcNeiCyM25QZc7FpY_9x341B9Br2pik46FYRqqat95i6i2YAA/exec";
 
 
-/* ======================================================
+/* =========================================================
    VARIABEL
-====================================================== */
+========================================================= */
 
 let scanner =
-new Html5Qrcode("reader");
+  new Html5Qrcode("reader");
 
-let sedangScan=false;
-let sedangMengirim=false;
+let sedangScan =
+  false;
 
-let qrHasil="";
-let lengkapDipilih="";
+let sedangMengirim =
+  false;
 
-let transaksiDipilih=
-"BARANG MASUK";
+let qrHasil =
+  "";
+
+let lengkapDipilih =
+  "";
+
+let transaksiDipilih =
+  "BARANG MASUK";
 
 
-/* ======================================================
+/* =========================================================
    HELPER
-====================================================== */
+========================================================= */
 
 function $(id){
+
   return document.getElementById(id);
+
 }
 
 
-/* ======================================================
+/* =========================================================
    SAPAAN
-====================================================== */
+========================================================= */
 
 function aturSapaan(){
 
-  const jam=
-  new Date().getHours();
+  const jam =
+    new Date().getHours();
 
-  let sapaan="Selamat malam";
+  let sapaan =
+    "Selamat malam";
 
-  if(jam>=5 && jam<11){
-    sapaan="Selamat pagi";
+  if(
+    jam >= 5 &&
+    jam < 11
+  ){
+
+    sapaan =
+      "Selamat pagi";
+
   }
-  else if(jam>=11 && jam<15){
-    sapaan="Selamat siang";
+  else if(
+    jam >= 11 &&
+    jam < 15
+  ){
+
+    sapaan =
+      "Selamat siang";
+
   }
-  else if(jam>=15 && jam<19){
-    sapaan="Selamat sore";
+  else if(
+    jam >= 15 &&
+    jam < 19
+  ){
+
+    sapaan =
+      "Selamat sore";
+
   }
 
-  $("greeting").innerText=
-  sapaan;
+  $("greeting").innerText =
+    sapaan;
+
 }
 
 
-/* ======================================================
+/* =========================================================
    NOTIFIKASI
-====================================================== */
+========================================================= */
 
-function tampilNotifikasi(pesan,tipe){
+function tampilNotifikasi(
+  pesan,
+  tipe
+){
 
-  const box=$("notifikasi");
+  const box =
+    $("notifikasi");
 
-  box.className=
-  "notifikasi show "+tipe;
+  box.className =
+    "notifikasi show " + tipe;
 
-  box.innerText=pesan;
+  box.innerText =
+    pesan;
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
 }
 
 
 function hapusNotifikasi(){
 
-  $("notifikasi").className=
-  "notifikasi";
+  $("notifikasi").className =
+    "notifikasi";
 
-  $("notifikasi").innerText="";
+  $("notifikasi").innerText =
+    "";
+
 }
 
 
-/* ======================================================
+/* =========================================================
    LOAD MASTER
-====================================================== */
+========================================================= */
 
 async function loadMaster(){
 
   try{
 
-    $("petugas").innerHTML=
-    '<option value="">Memuat petugas...</option>';
+    $("petugas").innerHTML =
+      '<option value="">Memuat petugas...</option>';
 
-    $("ruangan").innerHTML=
-    '<option value="">Memuat ruangan...</option>';
-
-
-    const url=
-    API_URL+
-    "?action=getMaster&_="+
-    Date.now();
+    $("ruangan").innerHTML =
+      '<option value="">Memuat ruangan...</option>';
 
 
-    const response=
-    await fetch(
-      url,
-      {
-        method:"GET",
-        cache:"no-store"
-      }
-    );
+    const response =
+      await fetch(
+        API_URL +
+        "?action=getMaster&_=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
 
 
     if(!response.ok){
 
       throw new Error(
-        "Server memberikan HTTP "+response.status
+        "Server HTTP " +
+        response.status
       );
 
     }
 
 
-    const text=
-    await response.text();
-
-
-    console.log(
-      "RESPON MASTER:",
-      text
-    );
-
-
-    let result;
-
-    try{
-
-      result=
-      JSON.parse(text);
-
-    }
-    catch(error){
-
-      throw new Error(
-        "Respons Apps Script bukan JSON."
-      );
-
-    }
+    const result =
+      await response.json();
 
 
     if(!result.berhasil){
 
       throw new Error(
-        result.pesan||
-        "Master data gagal dimuat."
+        result.pesan ||
+        "Gagal memuat master."
       );
 
     }
 
 
-    /* ================= PETUGAS ================= */
+    /* PETUGAS */
 
-    const daftarPetugas=
-    Array.isArray(result.petugas)
-    ? result.petugas
-    : [];
+    $("petugas").innerHTML =
+      '<option value="">Pilih Petugas</option>';
 
 
-    $("petugas").innerHTML=
-    '<option value="">Pilih Petugas</option>';
-
-
-    daftarPetugas.forEach(
+    (
+      result.petugas || []
+    ).forEach(
       function(nama){
 
         if(!nama) return;
 
-        const option=
-        document.createElement("option");
+        const option =
+          document.createElement(
+            "option"
+          );
 
-        option.value=nama;
-        option.textContent=nama;
+        option.value =
+          nama;
 
-        $("petugas").appendChild(option);
+        option.textContent =
+          nama;
+
+        $("petugas")
+          .appendChild(option);
 
       }
     );
 
 
-    /* ================= RUANGAN ================= */
+    /* RUANGAN */
 
-    const daftarRuangan=
-    Array.isArray(result.ruangan)
-    ? result.ruangan
-    : [];
+    $("ruangan").innerHTML =
+      '<option value="">Pilih Ruangan</option>';
 
 
-    $("ruangan").innerHTML=
-    '<option value="">Pilih Ruangan</option>';
-
-
-    daftarRuangan.forEach(
+    (
+      result.ruangan || []
+    ).forEach(
       function(nama){
 
         if(!nama) return;
 
-        const option=
-        document.createElement("option");
+        const option =
+          document.createElement(
+            "option"
+          );
 
-        option.value=nama;
-        option.textContent=nama;
+        option.value =
+          nama;
 
-        $("ruangan").appendChild(option);
+        option.textContent =
+          nama;
+
+        $("ruangan")
+          .appendChild(option);
 
       }
     );
 
 
     if(
-      daftarPetugas.length===0 ||
-      daftarRuangan.length===0
+      !result.petugas ||
+      result.petugas.length === 0
     ){
 
       tampilNotifikasi(
-        "Master berhasil terhubung, tetapi data petugas atau ruangan masih kosong.",
+        "Data petugas masih kosong.",
         "info"
       );
 
     }
 
+
   }
   catch(error){
 
     console.error(
-      "LOAD MASTER ERROR:",
+      "LOAD MASTER:",
       error
     );
 
 
-    $("petugas").innerHTML=
-    '<option value="">Gagal memuat petugas</option>';
+    $("petugas").innerHTML =
+      '<option value="">Gagal memuat petugas</option>';
 
-    $("ruangan").innerHTML=
-    '<option value="">Gagal memuat ruangan</option>';
+    $("ruangan").innerHTML =
+      '<option value="">Gagal memuat ruangan</option>';
 
 
     tampilNotifikasi(
-      "GAGAL MEMUAT PETUGAS / RUANGAN\n"+
+      "GAGAL MEMUAT PETUGAS / RUANGAN\n" +
       error.message,
       "gagal"
     );
@@ -1064,48 +1967,67 @@ async function loadMaster(){
 }
 
 
-/* ======================================================
+/* =========================================================
    TRANSAKSI
-====================================================== */
+========================================================= */
 
-function pilihTransaksi(nilai){
+function pilihTransaksi(
+  nilai
+){
 
-  transaksiDipilih=nilai;
+  transaksiDipilih =
+    nilai;
 
-  $("transaksi").value=nilai;
+  $("transaksi").value =
+    nilai;
 
 
   document
-  .querySelectorAll(".btn-transaksi")
-  .forEach(
-    function(button){
+    .querySelectorAll(
+      ".btn-transaksi"
+    )
+    .forEach(
+      function(button){
 
-      button.classList.remove("aktif");
+        button.classList
+          .remove("aktif");
 
-    }
-  );
+      }
+    );
 
 
-  if(nilai==="BARANG MASUK"){
+  if(
+    nilai ===
+    "BARANG MASUK"
+  ){
 
     $("transaksiMasuk")
-    .classList.add("aktif");
+      .classList
+      .add("aktif");
 
   }
 
 
-  if(nilai==="PROSES STERIL"){
+  if(
+    nilai ===
+    "PROSES STERIL"
+  ){
 
     $("transaksiSteril")
-    .classList.add("aktif");
+      .classList
+      .add("aktif");
 
   }
 
 
-  if(nilai==="BARANG KELUAR"){
+  if(
+    nilai ===
+    "BARANG KELUAR"
+  ){
 
     $("transaksiKeluar")
-    .classList.add("aktif");
+      .classList
+      .add("aktif");
 
   }
 
@@ -1113,103 +2035,146 @@ function pilihTransaksi(nilai){
 
 
 $("transaksiMasuk")
-.addEventListener(
-  "click",
-  ()=>pilihTransaksi("BARANG MASUK")
-);
+  .addEventListener(
+    "click",
+    function(){
+
+      pilihTransaksi(
+        "BARANG MASUK"
+      );
+
+    }
+  );
 
 
 $("transaksiSteril")
-.addEventListener(
-  "click",
-  ()=>pilihTransaksi("PROSES STERIL")
-);
+  .addEventListener(
+    "click",
+    function(){
+
+      pilihTransaksi(
+        "PROSES STERIL"
+      );
+
+    }
+  );
 
 
 $("transaksiKeluar")
-.addEventListener(
-  "click",
-  ()=>pilihTransaksi("BARANG KELUAR")
-);
+  .addEventListener(
+    "click",
+    function(){
+
+      pilihTransaksi(
+        "BARANG KELUAR"
+      );
+
+    }
+  );
 
 
-/* ======================================================
+/* =========================================================
    JUMLAH
-====================================================== */
+========================================================= */
 
 function ambilJumlah(){
 
-  let jumlah=
-  Number($("jumlah").value);
+  let jumlah =
+    Number(
+      $("jumlah").value
+    );
 
-  if(!jumlah || jumlah<1){
-    jumlah=1;
+
+  if(
+    !jumlah ||
+    jumlah < 1
+  ){
+
+    jumlah = 1;
+
   }
 
+
   return jumlah;
+
 }
 
 
 $("btnTambah")
-.addEventListener(
-  "click",
-  function(){
+  .addEventListener(
+    "click",
+    function(){
 
-    $("jumlah").value=
-    ambilJumlah()+1;
+      $("jumlah").value =
+        ambilJumlah() + 1;
 
-  }
-);
+    }
+  );
 
 
 $("btnKurang")
-.addEventListener(
-  "click",
-  function(){
+  .addEventListener(
+    "click",
+    function(){
 
-    const jumlah=
-    ambilJumlah();
+      const jumlah =
+        ambilJumlah();
 
-    if(jumlah>1){
 
-      $("jumlah").value=
-      jumlah-1;
+      if(jumlah > 1){
+
+        $("jumlah").value =
+          jumlah - 1;
+
+      }
 
     }
-
-  }
-);
+  );
 
 
-/* ======================================================
+/* =========================================================
    KONDISI
-====================================================== */
+========================================================= */
 
-function pilihKondisi(nilai){
+function pilihKondisi(
+  nilai
+){
 
-  lengkapDipilih=nilai;
+  lengkapDipilih =
+    nilai;
 
-  $("lengkap").value=nilai;
+  $("lengkap").value =
+    nilai;
+
 
   $("btnLengkap")
-  .classList.remove("aktif");
+    .classList
+    .remove("aktif");
+
 
   $("btnTidakLengkap")
-  .classList.remove("aktif");
+    .classList
+    .remove("aktif");
 
 
-  if(nilai==="YA"){
+  if(
+    nilai === "YA"
+  ){
 
     $("btnLengkap")
-    .classList.add("aktif");
+      .classList
+      .add("aktif");
 
   }
 
 
-  if(nilai==="TIDAK"){
+  if(
+    nilai === "TIDAK"
+  ){
 
     $("btnTidakLengkap")
-    .classList.add("aktif");
+      .classList
+      .add("aktif");
 
   }
 
@@ -1220,46 +2185,58 @@ function pilihKondisi(nilai){
 
 
 $("btnLengkap")
-.addEventListener(
-  "click",
-  ()=>pilihKondisi("YA")
-);
+  .addEventListener(
+    "click",
+    function(){
+
+      pilihKondisi("YA");
+
+    }
+  );
 
 
 $("btnTidakLengkap")
-.addEventListener(
-  "click",
-  ()=>pilihKondisi("TIDAK")
-);
+  .addEventListener(
+    "click",
+    function(){
+
+      pilihKondisi("TIDAK");
+
+    }
+  );
 
 
-/* ======================================================
-   CEK KIRIM
-====================================================== */
+/* =========================================================
+   CEK KESIAPAN
+========================================================= */
 
 function periksaKesiapanKirim(){
 
-  $("btnKirim").disabled=
-  !(
-    qrHasil &&
-    lengkapDipilih
-  );
+  $("btnKirim").disabled =
+    !(
+      qrHasil &&
+      lengkapDipilih
+    );
 
 }
 
 
-/* ======================================================
+/* =========================================================
    SCANNER
-====================================================== */
+========================================================= */
 
 async function mulaiScanner(){
 
-  if(sedangScan) return;
+  if(sedangScan)
+    return;
 
-  sedangScan=true;
 
-  $("status").innerText=
-  "Arahkan kamera ke QR Code...";
+  sedangScan =
+    true;
+
+
+  $("status").innerText =
+    "📷 Arahkan kamera ke QR Code...";
 
 
   try{
@@ -1267,15 +2244,20 @@ async function mulaiScanner(){
     await scanner.start(
 
       {
-        facingMode:"environment"
+        facingMode:
+          "environment"
       },
 
       {
         fps:10,
+
         qrbox:{
           width:210,
           height:210
-        }
+        },
+
+        aspectRatio:1.0
+
       },
 
       berhasilScan,
@@ -1285,21 +2267,29 @@ async function mulaiScanner(){
     );
 
 
-    $("status").innerText=
-    "Kamera aktif. Siap scan QR Code.";
+    $("status").innerText =
+      "📷 Kamera aktif. Siap scan QR Code.";
 
   }
   catch(error){
 
-    console.error(error);
+    console.error(
+      "KAMERA:",
+      error
+    );
 
-    sedangScan=false;
 
-    $("status").innerText=
-    "Kamera tidak dapat digunakan.";
+    sedangScan =
+      false;
+
+
+    $("status").innerText =
+      "❌ Kamera tidak dapat digunakan.";
+
 
     tampilNotifikasi(
-      "Kamera tidak dapat digunakan. Pastikan izin kamera diberikan.",
+      "Kamera tidak dapat digunakan.\n" +
+      "Pastikan izin kamera diberikan.",
       "gagal"
     );
 
@@ -1308,68 +2298,89 @@ async function mulaiScanner(){
 }
 
 
-/* ======================================================
+/* =========================================================
    STOP SCANNER
-====================================================== */
+========================================================= */
 
 async function berhentiScanner(){
 
-  if(!sedangScan) return;
+  if(!sedangScan)
+    return;
+
 
   try{
+
     await scanner.stop();
+
   }
   catch(error){
-    console.log(error);
+
+    console.log(
+      "Scanner stop:",
+      error
+    );
+
   }
 
-  sedangScan=false;
+
+  sedangScan =
+    false;
 
 }
 
 
-/* ======================================================
+/* =========================================================
    HASIL SCAN
-====================================================== */
+========================================================= */
 
-async function berhasilScan(decodedText){
+async function berhasilScan(
+  decodedText
+){
 
-  if(qrHasil || sedangMengirim){
+  if(
+    qrHasil ||
+    sedangMengirim
+  ){
+
     return;
+
   }
 
 
-  qrHasil=
-  String(decodedText).trim();
+  qrHasil =
+    String(
+      decodedText
+    ).trim();
 
 
-  if(!qrHasil){
+  if(!qrHasil)
     return;
-  }
 
 
   await berhentiScanner();
 
 
-  $("hasilScan").innerText=
-  qrHasil;
+  $("hasilScan").innerText =
+    qrHasil;
 
 
   $("hasilBox")
-  .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
 
   $("btnScanUlang")
-  .classList.remove("hidden");
+    .classList
+    .remove("hidden");
 
 
-  $("status").innerText=
-  "QR berhasil dibaca. Jika salah, tekan SCAN ULANG.";
+  $("status").innerText =
+    "✅ QR berhasil dibaca. Periksa data.";
 
 
   tampilNotifikasi(
-    "QR BERHASIL TERBACA\n"+
-    qrHasil+
+    "QR BERHASIL TERBACA\n\n" +
+    qrHasil +
     "\n\nJika salah, tekan SCAN ULANG.",
     "info"
   );
@@ -1380,19 +2391,19 @@ async function berhasilScan(decodedText){
 }
 
 
-/* ======================================================
+/* =========================================================
    SCAN ULANG
-====================================================== */
+========================================================= */
 
 $("btnScanUlang")
-.addEventListener(
-  "click",
-  async function(){
+  .addEventListener(
+    "click",
+    async function(){
 
-    await resetUntukScan();
+      await resetUntukScan();
 
-  }
-);
+    }
+  );
 
 
 async function resetUntukScan(){
@@ -1400,42 +2411,58 @@ async function resetUntukScan(){
   await berhentiScanner();
 
 
-  qrHasil="";
+  qrHasil =
+    "";
 
-  lengkapDipilih="";
+  lengkapDipilih =
+    "";
 
 
-  $("hasilScan").innerText="";
+  $("hasilScan").innerText =
+    "";
+
 
   $("hasilBox")
-  .classList.add("hidden");
+    .classList
+    .add("hidden");
+
 
   $("btnScanUlang")
-  .classList.add("hidden");
+    .classList
+    .add("hidden");
 
 
-  $("lengkap").value="";
+  $("lengkap").value =
+    "";
 
 
   $("btnLengkap")
-  .classList.remove("aktif");
+    .classList
+    .remove("aktif");
+
 
   $("btnTidakLengkap")
-  .classList.remove("aktif");
+    .classList
+    .remove("aktif");
 
 
-  $("keterangan").value="";
+  $("keterangan").value =
+    "";
 
-  $("jumlah").value=1;
 
-  $("btnKirim").disabled=true;
+  $("jumlah").value =
+    1;
+
+
+  $("btnKirim").disabled =
+    true;
 
 
   hapusNotifikasi();
 
 
-  $("status").innerText=
-  "Menyiapkan kamera...";
+  $("status").innerText =
+    "Menyiapkan kamera...";
 
 
   await mulaiScanner();
@@ -1443,454 +2470,514 @@ async function resetUntukScan(){
 }
 
 
-/* ======================================================
+/* =========================================================
    KIRIM DATA
-====================================================== */
+========================================================= */
 
 $("btnKirim")
-.addEventListener(
-  "click",
-  async function(){
+  .addEventListener(
+    "click",
+    async function(){
 
-    if(sedangMengirim) return;
-
-
-    const petugas=
-    $("petugas").value;
-
-    const transaksi=
-    $("transaksi").value;
-
-    const jumlah=
-    Number($("jumlah").value);
-
-    const ruangan=
-    $("ruangan").value;
-
-    const keterangan=
-    $("keterangan")
-    .value
-    .trim();
+      if(sedangMengirim)
+        return;
 
 
-    if(!qrHasil){
+      const petugas =
+        $("petugas").value;
 
-      tampilNotifikasi(
-        "QR Code belum dipindai.",
-        "gagal"
-      );
+      const transaksi =
+        $("transaksi").value;
 
-      return;
-
-    }
-
-
-    if(!petugas){
-
-      tampilNotifikasi(
-        "Silakan pilih petugas.",
-        "gagal"
-      );
-
-      return;
-
-    }
-
-
-    if(!ruangan){
-
-      tampilNotifikasi(
-        "Silakan pilih ruangan.",
-        "gagal"
-      );
-
-      return;
-
-    }
-
-
-    if(!jumlah || jumlah<1){
-
-      tampilNotifikasi(
-        "Jumlah minimal 1.",
-        "gagal"
-      );
-
-      return;
-
-    }
-
-
-    if(
-      lengkapDipilih!=="YA" &&
-      lengkapDipilih!=="TIDAK"
-    ){
-
-      tampilNotifikasi(
-        "Silakan pilih LENGKAP atau TIDAK LENGKAP.",
-        "gagal"
-      );
-
-      return;
-
-    }
-
-
-    sedangMengirim=true;
-
-    $("btnKirim").disabled=true;
-
-
-    tampilNotifikasi(
-      "SEDANG MENGIRIM DATA...",
-      "info"
-    );
-
-
-    const data=
-    new URLSearchParams();
-
-
-    data.append(
-      "action",
-      "simpanTransaksi"
-    );
-
-    data.append(
-      "transaksi",
-      transaksi
-    );
-
-    data.append(
-      "petugas",
-      petugas
-    );
-
-    data.append(
-      "namaBarang",
-      qrHasil
-    );
-
-    data.append(
-      "jumlah",
-      jumlah
-    );
-
-    data.append(
-      "ruangan",
-      ruangan
-    );
-
-    data.append(
-      "lengkap",
-      lengkapDipilih
-    );
-
-    data.append(
-      "keterangan",
-      keterangan
-    );
-
-
-    try{
-
-      const response=
-      await fetch(
-        API_URL,
-        {
-          method:"POST",
-          body:data,
-          cache:"no-store"
-        }
-      );
-
-
-      const result=
-      await response.json();
-
-
-      if(!result.berhasil){
-
-        throw new Error(
-          result.pesan||
-          "Data gagal disimpan."
+      const jumlah =
+        Number(
+          $("jumlah").value
         );
+
+      const ruangan =
+        $("ruangan").value;
+
+      const keterangan =
+        $("keterangan")
+          .value
+          .trim();
+
+
+      if(!qrHasil){
+
+        tampilNotifikasi(
+          "QR Code belum dipindai.",
+          "gagal"
+        );
+
+        return;
 
       }
 
 
-      tampilNotifikasi(
-        "BARANG TERKIRIM\n"+
-        "Data berhasil masuk ke Google Sheet.\n\n"+
-        "Nomor: "+
-        result.nomor,
-        "sukses"
-      );
+      if(!petugas){
+
+        tampilNotifikasi(
+          "Silakan pilih petugas.",
+          "gagal"
+        );
+
+        return;
+
+      }
 
 
-      $("status").innerText=
-      "BARANG TERKIRIM";
+      if(!ruangan){
+
+        tampilNotifikasi(
+          "Silakan pilih ruangan.",
+          "gagal"
+        );
+
+        return;
+
+      }
 
 
-      sedangMengirim=false;
+      if(
+        !jumlah ||
+        jumlah < 1
+      ){
+
+        tampilNotifikasi(
+          "Jumlah minimal 1.",
+          "gagal"
+        );
+
+        return;
+
+      }
 
 
-      qrHasil="";
+      if(
+        lengkapDipilih !== "YA" &&
+        lengkapDipilih !== "TIDAK"
+      ){
 
-      lengkapDipilih="";
+        tampilNotifikasi(
+          "Silakan pilih LENGKAP atau TIDAK LENGKAP.",
+          "gagal"
+        );
 
+        return;
 
-      $("hasilScan").innerText="";
-
-      $("hasilBox")
-      .classList.add("hidden");
-
-      $("btnScanUlang")
-      .classList.add("hidden");
-
-
-      $("lengkap").value="";
-
-      $("btnLengkap")
-      .classList.remove("aktif");
-
-      $("btnTidakLengkap")
-      .classList.remove("aktif");
+      }
 
 
-      $("keterangan").value="";
-
-      $("jumlah").value=1;
-
-      $("btnKirim").disabled=true;
+      sedangMengirim =
+        true;
 
 
-      setTimeout(
-        async function(){
-
-          hapusNotifikasi();
-
-          await mulaiScanner();
-
-        },
-        1200
-      );
-
-
-    }
-    catch(error){
-
-      console.error(error);
-
-
-      sedangMengirim=false;
-
-      $("btnKirim").disabled=false;
+      $("btnKirim").disabled =
+        true;
 
 
       tampilNotifikasi(
-        "GAGAL MENGIRIM DATA\n"+
-        error.message+
-        "\n\nData belum tersimpan.",
-        "gagal"
+        "⏳ SEDANG MENGIRIM DATA...",
+        "info"
       );
 
+
+      const data =
+        new URLSearchParams();
+
+
+      data.append(
+        "action",
+        "simpanTransaksi"
+      );
+
+
+      data.append(
+        "transaksi",
+        transaksi
+      );
+
+
+      data.append(
+        "petugas",
+        petugas
+      );
+
+
+      data.append(
+        "namaBarang",
+        qrHasil
+      );
+
+
+      data.append(
+        "jumlah",
+        String(jumlah)
+      );
+
+
+      data.append(
+        "ruangan",
+        ruangan
+      );
+
+
+      data.append(
+        "lengkap",
+        lengkapDipilih
+      );
+
+
+      data.append(
+        "keterangan",
+        keterangan
+      );
+
+
+      try{
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+              method:"POST",
+              body:data,
+              cache:"no-store"
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if(
+          !result.berhasil
+        ){
+
+          throw new Error(
+            result.pesan ||
+            "Data gagal disimpan."
+          );
+
+        }
+
+
+        tampilNotifikasi(
+          "✅ BARANG TERKIRIM\n\n" +
+          "Data berhasil masuk ke Google Sheet.\n\n" +
+          "Nomor: " +
+          (
+            result.nomor ||
+            "-"
+          ),
+          "sukses"
+        );
+
+
+        $("status").innerText =
+          "✅ DATA BERHASIL TERKIRIM";
+
+
+        sedangMengirim =
+          false;
+
+
+        qrHasil =
+          "";
+
+        lengkapDipilih =
+          "";
+
+
+        $("hasilScan").innerText =
+          "";
+
+
+        $("hasilBox")
+          .classList
+          .add("hidden");
+
+
+        $("btnScanUlang")
+          .classList
+          .add("hidden");
+
+
+        $("lengkap").value =
+          "";
+
+
+        $("btnLengkap")
+          .classList
+          .remove("aktif");
+
+
+        $("btnTidakLengkap")
+          .classList
+          .remove("aktif");
+
+
+        $("keterangan").value =
+          "";
+
+
+        $("jumlah").value =
+          1;
+
+
+        $("btnKirim").disabled =
+          true;
+
+
+        setTimeout(
+          async function(){
+
+            hapusNotifikasi();
+
+            await mulaiScanner();
+
+          },
+          1300
+        );
+
+
+      }
+      catch(error){
+
+        console.error(
+          "KIRIM:",
+          error
+        );
+
+
+        sedangMengirim =
+          false;
+
+
+        $("btnKirim").disabled =
+          false;
+
+
+        tampilNotifikasi(
+          "❌ GAGAL MENGIRIM DATA\n\n" +
+          error.message +
+          "\n\nData belum tersimpan.",
+          "gagal"
+        );
+
+      }
+
     }
-
-  }
-);
+  );
 
 
-/* ======================================================
-   MODAL TAMBAH RUANGAN
-====================================================== */
+/* =========================================================
+   TAMBAH RUANGAN
+========================================================= */
 
 $("btnTambahRuangan")
-.addEventListener(
-  "click",
-  function(){
+  .addEventListener(
+    "click",
+    function(){
 
-    $("pinAdmin").value="";
-    $("namaRuangan").value="";
+      $("pinAdmin").value =
+        "";
 
-    $("modalRuangan")
-    .classList.add("show");
-
-  }
-);
-
-
-$("btnTutupRuangan")
-.addEventListener(
-  "click",
-  function(){
-
-    $("modalRuangan")
-    .classList.remove("show");
-
-  }
-);
-
-
-/* ======================================================
-   SIMPAN RUANGAN
-====================================================== */
-
-$("btnSimpanRuangan")
-.addEventListener(
-  "click",
-  async function(){
-
-    const pin=
-    $("pinAdmin")
-    .value
-    .trim();
-
-
-    const namaRuangan=
-    $("namaRuangan")
-    .value
-    .trim();
-
-
-    if(!pin){
-
-      alert(
-        "PIN Admin belum diisi."
-      );
-
-      return;
-
-    }
-
-
-    if(!namaRuangan){
-
-      alert(
-        "Nama ruangan belum diisi."
-      );
-
-      return;
-
-    }
-
-
-    this.disabled=true;
-
-    this.innerText=
-    "MENYIMPAN...";
-
-
-    const data=
-    new URLSearchParams();
-
-
-    data.append(
-      "action",
-      "tambahRuangan"
-    );
-
-    data.append(
-      "pin",
-      pin
-    );
-
-    data.append(
-      "namaRuangan",
-      namaRuangan
-    );
-
-
-    try{
-
-      const response=
-      await fetch(
-        API_URL,
-        {
-          method:"POST",
-          body:data,
-          cache:"no-store"
-        }
-      );
-
-
-      const result=
-      await response.json();
-
-
-      if(!result.berhasil){
-
-        throw new Error(
-          result.pesan||
-          "Gagal menambah ruangan."
-        );
-
-      }
+      $("namaRuangan").value =
+        "";
 
 
       $("modalRuangan")
-      .classList.remove("show");
+        .classList
+        .add("show");
+
+    }
+  );
 
 
-      tampilNotifikasi(
-        "RUANGAN BERHASIL DITAMBAHKAN\n"+
-        result.ruangan,
-        "sukses"
+$("btnTutupRuangan")
+  .addEventListener(
+    "click",
+    function(){
+
+      $("modalRuangan")
+        .classList
+        .remove("show");
+
+    }
+  );
+
+
+/* =========================================================
+   SIMPAN RUANGAN
+========================================================= */
+
+$("btnSimpanRuangan")
+  .addEventListener(
+    "click",
+    async function(){
+
+      const pin =
+        $("pinAdmin")
+          .value
+          .trim();
+
+
+      const namaRuangan =
+        $("namaRuangan")
+          .value
+          .trim();
+
+
+      if(!pin){
+
+        alert(
+          "PIN Admin belum diisi."
+        );
+
+        return;
+
+      }
+
+
+      if(!namaRuangan){
+
+        alert(
+          "Nama ruangan belum diisi."
+        );
+
+        return;
+
+      }
+
+
+      this.disabled =
+        true;
+
+
+      this.innerText =
+        "MENYIMPAN...";
+
+
+      const data =
+        new URLSearchParams();
+
+
+      data.append(
+        "action",
+        "tambahRuangan"
       );
 
 
-      await loadMaster();
-
-
-      $("ruangan").value=
-      result.ruangan;
-
-
-    }
-    catch(error){
-
-      tampilNotifikasi(
-        "GAGAL MENAMBAH RUANGAN\n"+
-        error.message,
-        "gagal"
+      data.append(
+        "pin",
+        pin
       );
 
+
+      data.append(
+        "namaRuangan",
+        namaRuangan
+      );
+
+
+      try{
+
+        const response =
+          await fetch(
+            API_URL,
+            {
+              method:"POST",
+              body:data,
+              cache:"no-store"
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        if(
+          !result.berhasil
+        ){
+
+          throw new Error(
+            result.pesan ||
+            "Gagal menambah ruangan."
+          );
+
+        }
+
+
+        $("modalRuangan")
+          .classList
+          .remove("show");
+
+
+        tampilNotifikasi(
+          "✅ RUANGAN BERHASIL DITAMBAHKAN\n\n" +
+          result.ruangan,
+          "sukses"
+        );
+
+
+        await loadMaster();
+
+
+        $("ruangan").value =
+          result.ruangan;
+
+      }
+      catch(error){
+
+        tampilNotifikasi(
+          "❌ GAGAL MENAMBAH RUANGAN\n\n" +
+          error.message,
+          "gagal"
+        );
+
+      }
+
+
+      this.disabled =
+        false;
+
+
+      this.innerText =
+        "SIMPAN";
+
     }
+  );
 
 
-    this.disabled=false;
-
-    this.innerText=
-    "SIMPAN";
-
-  }
-);
-
-
-/* ======================================================
-   KLIK LUAR MODAL
-====================================================== */
+/* =========================================================
+   MODAL
+========================================================= */
 
 $("modalRuangan")
-.addEventListener(
-  "click",
-  function(event){
+  .addEventListener(
+    "click",
+    function(event){
 
-    if(event.target===this){
+      if(
+        event.target === this
+      ){
 
-      this.classList.remove(
-        "show"
-      );
+        this.classList
+          .remove("show");
+
+      }
 
     }
-
-  }
-);
+  );
 
 
-/* ======================================================
-   START
-====================================================== */
+/* =========================================================
+   START SYSTEM
+========================================================= */
 
 aturSapaan();
 
@@ -1900,5 +2987,7 @@ mulaiScanner();
 
 </script>
 
+
 </body>
+
 </html>

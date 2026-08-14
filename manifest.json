@@ -1,0 +1,10 @@
+{
+  "name": "CSSD Digital System",
+  "short_name": "CSSD Digital",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#040607",
+  "theme_color": "#071018",
+  "lang": "id",
+  "description": "Sistem digital CSSD RSUD Harapan Insan Sendawar"
+}

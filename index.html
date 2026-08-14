@@ -11,6 +11,8 @@
 >
 
 <title>CSSD Digital System</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#071018">
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
@@ -1186,6 +1188,13 @@ button:disabled{
   class="notifikasi"
 ></div>
 
+<div id="koneksiBar"
+  style="margin:0 0 12px 0;padding:10px 12px;border-radius:12px;
+  font-size:11px;font-weight:800;text-align:center;
+  border:1px solid #263541;background:#0D141A;color:#94A3B8;">
+  🟢 ONLINE
+</div>
+
 
 
 <!-- ======================================================
@@ -1855,9 +1864,196 @@ function hapusNotifikasi(){
 }
 
 
+
+/* =========================================================
+   OFFLINE-FIRST / DATABASE LOKAL
+========================================================= */
+
+const OFFLINE_DB_NAME = "CSSD_DIGITAL_OFFLINE_V1";
+const OFFLINE_DB_VERSION = 1;
+const OFFLINE_STORE_QUEUE = "antrian";
+const OFFLINE_STORE_MASTER = "master";
+
+function bukaDatabaseOffline(){
+  return new Promise(function(resolve,reject){
+    const r=indexedDB.open(OFFLINE_DB_NAME,OFFLINE_DB_VERSION);
+    r.onupgradeneeded=function(e){
+      const db=e.target.result;
+      if(!db.objectStoreNames.contains(OFFLINE_STORE_QUEUE)){
+        const s=db.createObjectStore(OFFLINE_STORE_QUEUE,{keyPath:"id"});
+        s.createIndex("waktu","waktu",{unique:false});
+      }
+      if(!db.objectStoreNames.contains(OFFLINE_STORE_MASTER)){
+        db.createObjectStore(OFFLINE_STORE_MASTER,{keyPath:"id"});
+      }
+    };
+    r.onsuccess=function(){resolve(r.result)};
+    r.onerror=function(){reject(r.error||new Error("Database lokal tidak dapat dibuka."))};
+  });
+}
+
+async function simpanMasterOffline(petugas,ruangan){
+  const db=await bukaDatabaseOffline();
+  return new Promise(function(resolve,reject){
+    const tx=db.transaction(OFFLINE_STORE_MASTER,"readwrite");
+    tx.objectStore(OFFLINE_STORE_MASTER).put({
+      id:"master",petugas:Array.isArray(petugas)?petugas:[],
+      ruangan:Array.isArray(ruangan)?ruangan:[],waktu:Date.now()
+    });
+    tx.oncomplete=function(){db.close();resolve()};
+    tx.onerror=function(){db.close();reject(tx.error)};
+  });
+}
+
+async function ambilMasterOffline(){
+  try{
+    const db=await bukaDatabaseOffline();
+    return await new Promise(function(resolve,reject){
+      const tx=db.transaction(OFFLINE_STORE_MASTER,"readonly");
+      const r=tx.objectStore(OFFLINE_STORE_MASTER).get("master");
+      r.onsuccess=function(){db.close();resolve(r.result||null)};
+      r.onerror=function(){db.close();reject(r.error)};
+    });
+  }catch(e){console.error("AMBIL MASTER OFFLINE:",e);return null}
+}
+
+async function simpanAntrianOffline(payload){
+  const db=await bukaDatabaseOffline();
+  return new Promise(function(resolve,reject){
+    const tx=db.transaction(OFFLINE_STORE_QUEUE,"readwrite");
+    const id="OFF-"+Date.now()+"-"+Math.random().toString(36).slice(2,8);
+    tx.objectStore(OFFLINE_STORE_QUEUE).put({id:id,waktu:Date.now(),payload:payload,status:"MENUNGGU"});
+    tx.oncomplete=function(){db.close();resolve(id)};
+    tx.onerror=function(){db.close();reject(tx.error)};
+  });
+}
+
+async function ambilAntrianOffline(){
+  const db=await bukaDatabaseOffline();
+  return new Promise(function(resolve,reject){
+    const tx=db.transaction(OFFLINE_STORE_QUEUE,"readonly");
+    const r=tx.objectStore(OFFLINE_STORE_QUEUE).getAll();
+    r.onsuccess=function(){
+      db.close();
+      const a=r.result||[];
+      a.sort(function(x,y){return x.waktu-y.waktu});
+      resolve(a);
+    };
+    r.onerror=function(){db.close();reject(r.error)};
+  });
+}
+
+async function hapusAntrianOffline(id){
+  const db=await bukaDatabaseOffline();
+  return new Promise(function(resolve,reject){
+    const tx=db.transaction(OFFLINE_STORE_QUEUE,"readwrite");
+    tx.objectStore(OFFLINE_STORE_QUEUE).delete(id);
+    tx.oncomplete=function(){db.close();resolve()};
+    tx.onerror=function(){db.close();reject(tx.error)};
+  });
+}
+
+async function jumlahAntrianOffline(){
+  try{
+    const db=await bukaDatabaseOffline();
+    return await new Promise(function(resolve,reject){
+      const tx=db.transaction(OFFLINE_STORE_QUEUE,"readonly");
+      const r=tx.objectStore(OFFLINE_STORE_QUEUE).count();
+      r.onsuccess=function(){db.close();resolve(r.result||0)};
+      r.onerror=function(){db.close();reject(r.error)};
+    });
+  }catch(e){return 0}
+}
+
+function perbaruiKoneksiUI(online){
+  const bar=$("koneksiBar"); if(!bar)return;
+  if(online){
+    bar.innerText="🟢 ONLINE";
+    bar.style.color="#4ADE80"; bar.style.borderColor="#166534";
+  }else{
+    bar.innerText="🟠 OFFLINE — DATA AKAN DISIMPAN DI HP";
+    bar.style.color="#FBBF24"; bar.style.borderColor="#92400E";
+  }
+}
+
+async function perbaruiStatusAntrian(){
+  const jumlah=await jumlahAntrianOffline(),bar=$("koneksiBar");
+  if(!bar)return;
+  if(!navigator.onLine){
+    perbaruiKoneksiUI(false);
+    bar.innerText="🟠 OFFLINE — "+jumlah+" DATA MENUNGGU SINKRONISASI";
+  }else if(jumlah>0){
+    perbaruiKoneksiUI(true);
+    bar.innerText="🟡 ONLINE — "+jumlah+" DATA MENUNGGU SINKRONISASI";
+  }else perbaruiKoneksiUI(true);
+}
+
+async function kirimPayloadKeServer(payload){
+  const data=new URLSearchParams();
+  Object.keys(payload).forEach(function(k){data.append(k,payload[k]==null?"":String(payload[k]))});
+  const response=await fetch(API_URL,{method:"POST",body:data,cache:"no-store"});
+  if(!response.ok)throw new Error("Server HTTP "+response.status);
+  const result=await response.json();
+  if(!result.berhasil){
+    const e=new Error(result.pesan||"Data ditolak server.");
+    e.serverRejected=true; e.serverResult=result; throw e;
+  }
+  return result;
+}
+
+async function sinkronisasiAntrianOffline(){
+  if(!navigator.onLine)return;
+  const antrian=await ambilAntrianOffline();
+  if(!antrian.length){await perbaruiStatusAntrian();return}
+  $("status").innerText="🔄 Menyinkronkan "+antrian.length+" data offline...";
+  for(const item of antrian){
+    if(!navigator.onLine)break;
+    try{
+      const result=await kirimPayloadKeServer(item.payload);
+      await hapusAntrianOffline(item.id);
+      console.log("SYNC BERHASIL:",result);
+    }catch(error){
+      console.error("SYNC GAGAL:",error);
+      if(error.serverRejected) await hapusAntrianOffline(item.id);
+      else break;
+    }
+  }
+  await perbaruiStatusAntrian();
+  const sisa=await jumlahAntrianOffline();
+  $("status").innerText=sisa===0
+    ?"✅ SEMUA DATA OFFLINE BERHASIL DISINKRONKAN"
+    :"🟠 "+sisa+" DATA MASIH MENUNGGU SINKRONISASI";
+}
+
+async function daftarServiceWorker(){
+  if(!("serviceWorker" in navigator))return;
+  try{
+    const registration=await navigator.serviceWorker.register("./sw.js",{scope:"./"});
+    console.log("SERVICE WORKER AKTIF:",registration.scope);
+    if("sync" in registration){
+      try{await registration.sync.register("cssd-sync")}catch(e){console.warn("Background Sync tidak tersedia:",e)}
+    }
+  }catch(e){console.error("SERVICE WORKER:",e)}
+}
+
+window.addEventListener("online",async function(){
+  perbaruiKoneksiUI(true);
+  tampilNotifikasi("🟢 KONEKSI KEMBALI\n\nMemeriksa data offline...","info");
+  await sinkronisasiAntrianOffline();
+  setTimeout(hapusNotifikasi,1000);
+  await loadMaster();
+});
+
+window.addEventListener("offline",async function(){
+  perbaruiKoneksiUI(false);
+  await perbaruiStatusAntrian();
+  tampilNotifikasi("🟠 MODE OFFLINE AKTIF\n\nData baru akan disimpan di HP.\nMenunggu koneksi kembali.","info");
+});
+
 /* =========================================================
    LOAD MASTER
 ========================================================= */
+
 
 async function loadMaster(){
 
@@ -1869,6 +2065,29 @@ async function loadMaster(){
     $("ruangan").innerHTML =
       '<option value="">Memuat ruangan...</option>';
 
+    if(!navigator.onLine){
+
+      const local =
+        await ambilMasterOffline();
+
+      if(!local){
+
+        throw new Error(
+          "Belum ada master tersimpan di HP. Buka aplikasi saat online terlebih dahulu."
+        );
+
+      }
+
+      isiMasterKeForm(
+        local.petugas || [],
+        local.ruangan || []
+      );
+
+      await perbaruiStatusAntrian();
+
+      return;
+
+    }
 
     const response =
       await fetch(
@@ -1881,7 +2100,6 @@ async function loadMaster(){
         }
       );
 
-
     if(!response.ok){
 
       throw new Error(
@@ -1891,10 +2109,8 @@ async function loadMaster(){
 
     }
 
-
     const result =
       await response.json();
-
 
     if(!result.berhasil){
 
@@ -1905,82 +2121,23 @@ async function loadMaster(){
 
     }
 
+    const daftarPetugas =
+      result.petugas || [];
 
-    /* PETUGAS */
+    const daftarRuangan =
+      result.ruangan || [];
 
-    $("petugas").innerHTML =
-      '<option value="">Pilih Petugas</option>';
-
-
-    (
-      result.petugas || []
-    ).forEach(
-      function(nama){
-
-        if(!nama)
-          return;
-
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value =
-          nama;
-
-
-        option.textContent =
-          nama;
-
-
-        $("petugas")
-          .appendChild(
-            option
-          );
-
-      }
+    isiMasterKeForm(
+      daftarPetugas,
+      daftarRuangan
     );
 
-
-    /* RUANGAN */
-
-    $("ruangan").innerHTML =
-      '<option value="">Pilih Ruangan</option>';
-
-
-    (
-      result.ruangan || []
-    ).forEach(
-      function(nama){
-
-        if(!nama)
-          return;
-
-
-        const option =
-          document.createElement(
-            "option"
-          );
-
-
-        option.value =
-          nama;
-
-
-        option.textContent =
-          nama;
-
-
-        $("ruangan")
-          .appendChild(
-            option
-          );
-
-      }
+    await simpanMasterOffline(
+      daftarPetugas,
+      daftarRuangan
     );
 
+    await perbaruiStatusAntrian();
 
   }
   catch(error){
@@ -1990,14 +2147,27 @@ async function loadMaster(){
       error
     );
 
+    const local =
+      await ambilMasterOffline();
+
+    if(local){
+
+      isiMasterKeForm(
+        local.petugas || [],
+        local.ruangan || []
+      );
+
+      await perbaruiStatusAntrian();
+
+      return;
+
+    }
 
     $("petugas").innerHTML =
       '<option value="">Gagal memuat petugas</option>';
 
-
     $("ruangan").innerHTML =
       '<option value="">Gagal memuat ruangan</option>';
-
 
     tampilNotifikasi(
       "❌ GAGAL MEMUAT PETUGAS / RUANGAN\n\n" +
@@ -2006,6 +2176,74 @@ async function loadMaster(){
     );
 
   }
+
+}
+
+
+function isiMasterKeForm(
+  daftarPetugas,
+  daftarRuangan
+){
+
+  $("petugas").innerHTML =
+    '<option value="">Pilih Petugas</option>';
+
+  (
+    daftarPetugas || []
+  ).forEach(
+    function(nama){
+
+      if(!nama)
+        return;
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        nama;
+
+      option.textContent =
+        nama;
+
+      $("petugas")
+        .appendChild(
+          option
+        );
+
+    }
+  );
+
+  $("ruangan").innerHTML =
+    '<option value="">Pilih Ruangan</option>';
+
+  (
+    daftarRuangan || []
+  ).forEach(
+    function(nama){
+
+      if(!nama)
+        return;
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        nama;
+
+      option.textContent =
+        nama;
+
+      $("ruangan")
+        .appendChild(
+          option
+        );
+
+    }
+  );
 
 }
 
@@ -2579,6 +2817,43 @@ async function resetUntukScan(){
 }
 
 
+
+function resetFormSetelahKirim(){
+
+  qrHasil = "";
+
+  $("namaBarang").value = "";
+
+  lengkapDipilih = "";
+
+  $("hasilScan").innerText = "";
+
+  $("hasilBox")
+    .classList
+    .add("hidden");
+
+  $("btnScanUlang")
+    .classList
+    .add("hidden");
+
+  $("lengkap").value = "";
+
+  $("btnLengkap")
+    .classList
+    .remove("aktif");
+
+  $("btnTidakLengkap")
+    .classList
+    .remove("aktif");
+
+  $("keterangan").value = "";
+
+  $("jumlah").value = 1;
+
+  $("btnKirim").disabled = true;
+
+}
+
 /* =========================================================
    KIRIM DATA
 ========================================================= */
@@ -2783,51 +3058,64 @@ $("btnKirim")
 
       try{
 
-        const response =
-          await fetch(
-            API_URL,
-            {
-              method:"POST",
-
-              body:data,
-
-              cache:"no-store"
-            }
+        const payload =
+          Object.fromEntries(
+            data.entries()
           );
 
+        if(!navigator.onLine){
 
-        if(
-          !response.ok
-        ){
+          const offlineId =
+            await simpanAntrianOffline(
+              payload
+            );
 
-          throw new Error(
-            "Server HTTP " +
-            response.status
+          await perbaruiStatusAntrian();
+
+          tampilNotifikasi(
+            "🟠 DATA TERSIMPAN DI HP\n\n" +
+            "Internet sedang tidak tersedia.\n" +
+            "Data akan dikirim otomatis saat koneksi kembali.\n\n" +
+            "ID Offline: " +
+            offlineId,
+            "info"
           );
+
+          $("status").innerText =
+            "🟠 OFFLINE — DATA MENUNGGU SINKRONISASI";
+
+          resetFormSetelahKirim();
+
+          sedangMengirim = false;
+          $("btnKirim").disabled = true;
+
+          setTimeout(
+            async function(){
+
+              hapusNotifikasi();
+
+              $("status").innerText =
+                "📷 Menyiapkan scan berikutnya...";
+
+              await mulaiScanner();
+
+            },
+            1000
+          );
+
+          return;
 
         }
 
-
         const result =
-          await response.json();
-
+          await kirimPayloadKeServer(
+            payload
+          );
 
         console.log(
           "HASIL SERVER:",
           result
         );
-
-
-        if(
-          !result.berhasil
-        ){
-
-          throw new Error(
-            result.pesan ||
-            "Data gagal disimpan."
-          );
-
-        }
 
 
         /* =================================================
@@ -2899,56 +3187,9 @@ $("btnKirim")
          * TETAPI JANGAN menghapus notifikasi.
          */
 
-        qrHasil =
-          "";
+        resetFormSetelahKirim();
 
-
-        $("namaBarang").value =
-          "";
-
-
-        lengkapDipilih =
-          "";
-
-
-        $("hasilScan").innerText =
-          "";
-
-
-        $("hasilBox")
-          .classList
-          .add("hidden");
-
-
-        $("btnScanUlang")
-          .classList
-          .add("hidden");
-
-
-        $("lengkap").value =
-          "";
-
-
-        $("btnLengkap")
-          .classList
-          .remove("aktif");
-
-
-        $("btnTidakLengkap")
-          .classList
-          .remove("aktif");
-
-
-        $("keterangan").value =
-          "";
-
-
-        $("jumlah").value =
-          1;
-
-
-        $("btnKirim").disabled =
-          true;
+        await perbaruiStatusAntrian();
 
 
         sedangMengirim =
@@ -3247,7 +3488,24 @@ $("modalRuangan")
 
 aturSapaan();
 
+perbaruiKoneksiUI(
+  navigator.onLine
+);
+
+daftarServiceWorker();
+
 loadMaster();
+
+if(navigator.onLine){
+
+  setTimeout(
+    function(){
+      sinkronisasiAntrianOffline();
+    },
+    500
+  );
+
+}
 
 mulaiScanner();
 

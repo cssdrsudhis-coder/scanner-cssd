@@ -1347,6 +1347,37 @@ button:disabled{
 
 
 
+  <!-- NAMA BARANG / SET -->
+
+  <div class="field">
+
+    <label for="namaBarang">
+
+      📦 NAMA BARANG / SET
+
+    </label>
+
+
+    <input
+      id="namaBarang"
+      type="text"
+      placeholder="Scan QR atau ketik nama barang secara manual"
+      autocomplete="off"
+    >
+
+
+    <div
+      class="pesan-detail"
+      style="margin-top:7px;"
+    >
+
+      💡 Jika QR tidak tersedia, nama barang dapat diketik manual.
+
+    </div>
+
+  </div>
+
+
   <!-- PETUGAS -->
 
   <div class="field">
@@ -2238,13 +2269,29 @@ $("btnTidakLengkap")
 
 function periksaKesiapanKirim(){
 
+  const namaBarang =
+    $("namaBarang").value.trim();
+
   $("btnKirim").disabled =
     !(
-      qrHasil &&
+      namaBarang &&
       lengkapDipilih
     );
 
 }
+
+
+/* =========================================================
+   INPUT NAMA BARANG MANUAL
+========================================================= */
+
+$("namaBarang")
+  .addEventListener(
+    "input",
+    function(){
+      periksaKesiapanKirim();
+    }
+  );
 
 
 /* =========================================================
@@ -2405,6 +2452,14 @@ async function berhasilScan(
     qrHasil;
 
 
+  /*
+   * QR berhasil dibaca.
+   * Otomatis isi nama barang, tetapi tetap bisa diedit manual.
+   */
+  $("namaBarang").value =
+    qrHasil;
+
+
   $("hasilBox")
     .classList
     .remove("hidden");
@@ -2457,6 +2512,10 @@ async function resetUntukScan(){
 
 
   qrHasil =
+    "";
+
+
+  $("namaBarang").value =
     "";
 
 
@@ -2562,16 +2621,22 @@ $("btnKirim")
           .trim();
 
 
-      /* QR */
+      /* NAMA BARANG */
+
+      const namaBarang =
+        $("namaBarang").value.trim();
+
 
       if(
-        !qrHasil
+        !namaBarang
       ){
 
         tampilNotifikasi(
-          "❌ QR CODE BELUM DIPINDAI.",
+          "❌ NAMA BARANG BELUM DIISI.",
           "gagal"
         );
+
+        $("namaBarang").focus();
 
         return;
 
@@ -2688,7 +2753,7 @@ $("btnKirim")
 
       data.append(
         "namaBarang",
-        qrHasil
+        namaBarang
       );
 
 
@@ -2835,6 +2900,10 @@ $("btnKirim")
          */
 
         qrHasil =
+          "";
+
+
+        $("namaBarang").value =
           "";
 
 
